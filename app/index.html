@@ -9,8 +9,9 @@
   <main data-ng-controller="boardController">
     <table class="board">
       <tr class="board-row" data-ng-repeat="row in board">
-        <td class="board-square" data-ng-repeat="letter in row" data-ng-click="addLetter(letter)">
-          <p class="letter">{{letter}}</p>
+        <td class="board-square" data-ng-repeat="letter in row track by $index"
+          data-ng-click="addLetter(letter)" data-ng-class="{activate: isActive(letter)}">
+          <p class="letter">{{letter.letter}}</p>
         </td>
       </tr>
     </table>
@@ -20,6 +21,7 @@
     <ul class="word-list">
       <li data-ng-repeat="word in overflowList track by $index">{{word}}</li>
     </ul>
+    <p class="score">score: {{score}}</p>
     <div class="controls">
       <p>{{selectedWord}}<p>
       <button data-ng-click="clearWord()">Clear</button>
