@@ -7,16 +7,19 @@
 </head>
 <body data-ng-app="app">
   <main data-ng-controller="boardController">
-    <p>{{test}}</p>
     <table class="board">
       <tr class="board-row" data-ng-repeat="row in board">
-        <td class="board-square" data-ng-repeat="letter in row">
+        <td class="board-square" data-ng-repeat="letter in row" data-ng-click="addLetter(letter)">
           <p class="letter">{{letter}}</p>
         </td>
       </tr>
     </table>
-
-
+    <div class="controls">
+      <p>{{selectedWord}}<p>
+      <button data-ng-click="clearWord()">Clear</button>
+      <button data-ng-click="backspace()">Backspace</button>
+      <button data-ng-click="submitWord()">Submit</button>
+    </div>
   </main>
   <script src="http://localhost:8080/webpack-dev-server.js"></script>
   <script src="bundle.js"></script>
