@@ -1,3 +1,5 @@
+//disable hot dev server for build
+
 module.exports = {
   entry: ['webpack/hot/dev-server', __dirname + '/app/js/client.js'],
   output: {
@@ -6,12 +8,12 @@ module.exports = {
   },
   module: {
     loaders: [
-    {
-      test: /\.scss$/,
-      loader: 'style!css!sass'
-    }]
+      { test: /\.scss$/, loader: 'style!css!sass'},
+      { test: /[\/]angular\.js$/, loader: "exports?angular" }
+    ]
   },
   resolve: {
-    extensions: ['', '.js', '.scss']
+    extensions: ['', '.js', '.scss'],
+    modulesDirectories: ["node_modules"]
   }
 }
