@@ -8,13 +8,14 @@ body {
 }
 
 main {
-  width: 50%;
+  width: 60%;
   margin: 0 auto;
 }
 
 .board {
   float: left;
   border-spacing: 10px;
+  width: 30%;
 
   .board-square {
     background-color:  $color-two;
@@ -34,10 +35,26 @@ main {
   }
 }
 
+.word-list {
+  float: left;
+  list-style: none;
+  width: 25%;
+  padding: 0;
+
+  li {
+    font-size: 15px;
+    font-size: 30px;
+    text-shadow: 0 0 2px white;
+    font-weight: bold;
+    font-family: Helvetica;
+    width: 50%;
+  }
+}
+
 .controls {
   clear: both;
   margin: 0 auto;
-  width: 245px;
+  width: 40%;
   p {
     font-size: 40px;
     text-shadow: 0 0 2px white;

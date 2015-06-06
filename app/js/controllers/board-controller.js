@@ -10,6 +10,9 @@ module.exports = function(app) {
 
     $scope.selectedWord = '';
 
+    $scope.wordList = [];
+    $scope.overflowList = [];
+
     $scope.addLetter = function(letter) {
       $scope.selectedWord += letter;
     }
@@ -22,8 +25,15 @@ module.exports = function(app) {
       $scope.selectedWord = $scope.selectedWord.slice(0, -1);
     }
 
-    $scope.submitWord = function() {
+    $scope.submitWord = function(word) {
+      var list = $scope.wordList.length <= 7 ? $scope.wordList : $scope.overflowList;
+      list.push($scope.selectedWord);
       $scope.selectedWord = '';
+    }
+
+    $scope.scoreBoard = function() {
+      $scope.wordList = [];
+      $scope.overflowList = [];
     }
 
   }])

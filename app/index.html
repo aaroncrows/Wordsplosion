@@ -14,11 +14,18 @@
         </td>
       </tr>
     </table>
+    <ul class="word-list">
+      <li data-ng-repeat="word in wordList track by $index">{{word}}</li>
+    </ul>
+    <ul class="word-list">
+      <li data-ng-repeat="word in overflowList track by $index">{{word}}</li>
+    </ul>
     <div class="controls">
       <p>{{selectedWord}}<p>
       <button data-ng-click="clearWord()">Clear</button>
       <button data-ng-click="backspace()">Backspace</button>
       <button data-ng-click="submitWord()">Submit</button>
+      <button data-ng-click="scoreBoard()">Score</button>
     </div>
   </main>
   <script src="http://localhost:8080/webpack-dev-server.js"></script>
