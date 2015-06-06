@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WORDSPLOSION</title>
+</head>
+<body data-ng-app="app">
+  <main data-ng-controller="boardController">
+    <p>{{test}}</p>
+    <table>
+      <tr data-ng-repeat="row in board">
+        <td data-ng-repeat="letter in row">{{letter}}</td>
+      </tr>
+    </table>
+
+
+  </main>
+  <script src="http://localhost:8080/webpack-dev-server.js"></script>
+  <script src="bundle.js"></script>
+</body>
+</html>

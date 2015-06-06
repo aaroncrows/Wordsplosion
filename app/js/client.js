@@ -1,6 +1,7 @@
 'use strict';
 
-require('angular/angular');
+require('angular');
 
 var app = angular.module('app', []);
 
+require('./controllers/board-controller')(app);
