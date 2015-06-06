@@ -27,4 +27,12 @@ BoardActiveTree.prototype.activateNode = function(location) {
   this.map[location[0]][location[1]] = true;
 }
 
+BoardActiveTree.prototype.deactivateAll = function(board) {
+  for (var i = 0; i < board.length; i++) {
+    this.map[i] = {};
+    for (var j = 0; j < board[i].length; j++) {
+      this.map[i][j] = false;
+    }
+  }
+}
 module.exports = BoardActiveTree;

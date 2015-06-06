@@ -10,7 +10,8 @@
     <table class="board">
       <tr class="board-row" data-ng-repeat="row in board">
         <td class="board-square" data-ng-repeat="letter in row track by $index"
-          data-ng-click="addLetter(letter)" data-ng-class="{activate: isActive(letter)}">
+          data-ng-click="addLetter(letter)"
+          data-ng-class="{activate: (isActive(letter) && !isChosen(letter)), chosen: isChosen(letter)}">
           <p class="letter">{{letter.letter}}</p>
         </td>
       </tr>
@@ -24,7 +25,7 @@
     <p class="score">score: {{score}}</p>
     <div class="controls">
       <p>{{selectedWord}}<p>
-      <button data-ng-click="clearWord()">Clear</button>
+      <button data-ng-click="clearBoard()">Clear</button>
       <button data-ng-click="backspace()">Backspace</button>
       <button data-ng-click="submitWord()">Submit</button>
       <button data-ng-click="scoreBoard()">Score</button>

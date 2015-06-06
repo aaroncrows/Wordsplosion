@@ -28,11 +28,15 @@ var board = (function() {
 
 module.exports = function(app) {
   app.controller('boardController', ['$scope', function($scope){
+
+    //game board and map of active nodes
     $scope.board = board;
     $scope.tree = new ActiveTree(board);
 
-
+    //display word and object map for its letter locations
     $scope.selectedWord = '';
+    $scope.selectedWordObj = {};
+
     $scope.canSubmit = true;
     $scope.score;
 
@@ -40,9 +44,20 @@ module.exports = function(app) {
     $scope.overflowList = [];
 
     $scope.addLetter = function(letter) {
-      $scope.selectedWord += letter.letter;
-      $scope.tree.activateNode(letter.location);
-      console.log($scope.isActive(letter));
+      var loc = letter.location;
+      var wordObj = $scope.selectedWordObj;
+
+      if(($scope.isActive(letter) || !$scope.selectedWordObj.anyPicked)
+          && !$scope.isChosen(letter)){
+        $scope.selectedWordObj.anyPicked = true;
+        $scope.selectedWord += letter.letter;
+
+        if (!wordObj[loc[0]]) wordObj[loc[0]] = {};
+        wordObj[loc[0]][loc[1]] = true;
+
+        $scope.tree.deactivateAll($scope.board);
+        $scope.tree.activateNode(letter.location);
+      }
     }
 
     $scope.isActive = function(letter) {
@@ -50,8 +65,18 @@ module.exports = function(app) {
       return $scope.tree.map[loc[0]][loc[1]];
     }
 
-    $scope.clearWord = function() {
+    //checks picked letters for passed in letter
+    $scope.isChosen = function(letter) {
+      var loc = letter.location;
+      var word = $scope.selectedWordObj;
+
+      return (word[loc[0]] && word[loc[0]][loc[1]]);
+    }
+
+    $scope.clearBoard = function() {
+      $scope.tree.deactivateAll($scope.board);
       $scope.selectedWord = '';
+      $scope.selectedWordObj = {};
     }
 
     $scope.backspace = function() {
@@ -63,7 +88,7 @@ module.exports = function(app) {
       if ($scope.selectedWord.length > 2) {
         var list = $scope.wordList.length <= 7 ? $scope.wordList : $scope.overflowList;
         list.push($scope.selectedWord);
-        $scope.selectedWord = '';
+        $scope.clearBoard();
       }
     }
 
@@ -72,6 +97,7 @@ module.exports = function(app) {
       $scope.wordList = [];
       $scope.overflowList = [];
       $scope.score = 0;
+      $scope.clearBoard();
 
       for (var i = 0; i < wordList.length; i++) {
         if(wordList[i].length < 8) {

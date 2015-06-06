@@ -3,6 +3,8 @@ $color: rgb(120, 120, 255);
 $color-two: rgb(255, 255, 100);
 $color-three: rgb(50, 50, 255);
 $color-bright: rgb(255, 255, 0);
+$color-bland: rgb(194, 178, 128);
+$color-chosen: rgb(0, 200, 200);
 
 body {
   background-color: $color;
@@ -17,13 +19,17 @@ main {
   background-color: $color-bright !important;
 }
 
+.chosen {
+  background-color: $color-chosen !important;
+}
+
 .board {
   float: left;
   border-spacing: 10px;
   width: 40%;
 
   .board-square {
-    background-color:  $color-two;
+    background-color:  $color-bland;
     height: 90px;
     width: 60px;
     padding-left: 7px;
