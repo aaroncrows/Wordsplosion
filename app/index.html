@@ -3,13 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>WORDSPLOSION</title>
+  <style href="./css/main.css" rel="stylesheet" type="text/css"></style>
 </head>
 <body data-ng-app="app">
   <main data-ng-controller="boardController">
     <p>{{test}}</p>
-    <table>
-      <tr data-ng-repeat="row in board">
-        <td data-ng-repeat="letter in row">{{letter}}</td>
+    <table class="board">
+      <tr class="board-row" data-ng-repeat="row in board">
+        <td class="board-square" data-ng-repeat="letter in row">
+          <p class="letter">{{letter}}</p>
+        </td>
       </tr>
     </table>
 

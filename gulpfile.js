@@ -11,7 +11,7 @@ var webpack = require('gulp-webpack');
 var paths = {
   js: './app/**/*.js',
   html: './app/index.html',
-  sass: './app/sass/**/*',
+  sass: './app/stylesheets/**/*.scss',
   client: './app/js/client.js'
 };
 

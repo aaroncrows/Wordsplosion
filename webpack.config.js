@@ -4,7 +4,14 @@ module.exports = {
     filename: 'bundle.js',
     path: __dirname + '/build/'
   },
+  module: {
+    loaders: [
+    {
+      test: /\.scss$/,
+      loader: 'style!css!sass'
+    }]
+  },
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js', '.scss']
   }
 }
