@@ -37,7 +37,7 @@ module.exports = function(app) {
     $scope.selectedWord = '';
     $scope.selectedWordObj = {};
 
-    $scope.canSubmit = true;
+    $scope.alreadyPicked = false;
     $scope.score;
 
     $scope.wordList = [];
@@ -51,6 +51,7 @@ module.exports = function(app) {
           && !$scope.isChosen(letter)){
         $scope.selectedWordObj.anyPicked = true;
         $scope.selectedWord += letter.letter;
+        $scope.alreadyPicked = false;
 
         if (!wordObj[loc[0]]) wordObj[loc[0]] = {};
         wordObj[loc[0]][loc[1]] = true;
@@ -81,15 +82,28 @@ module.exports = function(app) {
 
     $scope.backspace = function() {
       $scope.selectedWord = $scope.selectedWord.slice(0, -1);
-      console.log($scope.canSubmit);
     }
 
-    $scope.submitWord = function(word) {
-      if ($scope.selectedWord.length > 2) {
+    $scope.submitWord = function() {
+      var wordList = $scope.wordList.concat($scope.overflowList);
+      var picked = wordList.indexOf($scope.selectedWord) !== -1;
+      /*
+      *Only allows word submit if word longer than 2 characters in length
+      *and it's not in either of the word lists.
+      */
+      //console.log(wordList, picked, wordList.indexOf($scope.selectedWord))
+      if ($scope.selectedWord.length > 2  && !picked) {
+        console.log('1')
         var list = $scope.wordList.length <= 7 ? $scope.wordList : $scope.overflowList;
+        console.log('2')
         list.push($scope.selectedWord);
-        $scope.clearBoard();
+      } else {
+        console.log('3')
+        $scope.alreadyPicked = true;
       }
+      console.log('4')
+        $scope.clearBoard()
+      console.log('5')
     }
 
     $scope.scoreBoard = function() {

@@ -6,6 +6,15 @@ $color-bright: rgb(255, 255, 0);
 $color-bland: rgb(194, 178, 128);
 $color-chosen: rgb(0, 200, 200);
 
+@mixin noselect() {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+
+}
+
 body {
   background-color: $color;
 }
@@ -39,6 +48,7 @@ main {
                 inset 0 0 0 6px $color-three;
 
     .letter {
+      @include noselect();
       font-size: 50px;
       display: table-cell;
       font-family: Impact;
@@ -67,6 +77,7 @@ main {
   margin: 0 auto;
   width: 40%;
   p {
+    @include noselect();
     font-size: 40px;
     text-shadow: 0 0 2px white;
     font-weight: bold;
@@ -82,4 +93,12 @@ main {
     outline: none;
     border: 1px solid blue;
   }
+  span {
+    font-size: 18px;
+    color: red;
+  }
 }
+
+
+
+
