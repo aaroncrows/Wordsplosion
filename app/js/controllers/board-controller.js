@@ -3,14 +3,14 @@
 var ActiveTree = require('../../lib/graph');
 
 module.exports = function(app) {
-  app.controller('boardController', ['$scope', '$http', function($scope, $http){
+  app.controller('boardController', ['$scope', '$http', function($scope, $http) {
 
     $http.get('/new-game').success(function(data) {
       console.log(data);
       $scope.board = data.board;
       $scope.answers = data.solutions;
       $scope.tree = new ActiveTree(data.board);
-    })
+    });
 
     //display word and object map for its letter locations
     $scope.selectedWord = '';
@@ -18,7 +18,7 @@ module.exports = function(app) {
 
     $scope.alreadyPicked = false;
     $scope.notAWord = false;
-    $scope.score;
+    $scope.score = 0;
 
     $scope.wordList = [];
     $scope.overflowList = [];
@@ -26,9 +26,11 @@ module.exports = function(app) {
     $scope.addLetter = function(letter) {
       var loc = letter.location;
       var wordObj = $scope.selectedWordObj;
+      var activeLetter = $scope.isActive(letter);
+      var newBoard = !$scope.selectedWordObj.anyPicked;
+      var notChosen = !$scope.isChosen(letter);
 
-      if(($scope.isActive(letter) || !$scope.selectedWordObj.anyPicked)
-          && !$scope.isChosen(letter)){
+      if ((activeLetter || newBoard) && notChosen) {
         $scope.selectedWordObj.anyPicked = true;
         $scope.selectedWord += letter.letter;
         //clear warnings
@@ -41,12 +43,12 @@ module.exports = function(app) {
         $scope.tree.deactivateAll($scope.board);
         $scope.tree.activateNode(letter.location);
       }
-    }
+    };
 
     $scope.isActive = function(letter) {
       var loc = letter.location;
       return $scope.tree.map[loc[0]][loc[1]];
-    }
+    };
 
     //checks picked letters for passed in letter
     $scope.isChosen = function(letter) {
@@ -54,13 +56,13 @@ module.exports = function(app) {
       var word = $scope.selectedWordObj;
 
       return (word[loc[0]] && word[loc[0]][loc[1]]);
-    }
+    };
 
     $scope.clearBoard = function() {
       $scope.tree.deactivateAll($scope.board);
       $scope.selectedWord = '';
       $scope.selectedWordObj = {};
-    }
+    };
 
     $scope.newGame = function() {
       $http.get('/new-game').success(function(data) {
@@ -68,8 +70,8 @@ module.exports = function(app) {
         $scope.board = data.board;
         $scope.answers = data.solutions;
         $scope.tree = new ActiveTree(data.board);
-      })
-    }
+      });
+    };
 
     $scope.submitWord = function() {
       var wordList = $scope.wordList.concat($scope.overflowList);
@@ -81,16 +83,17 @@ module.exports = function(app) {
       * not in either of the word lists and in the solution list.
       */
       if ($scope.selectedWord.length > 2  && !picked && isWord) {
-        console.log('in conditional', isWord)
-        var list = $scope.wordList.length <= 7 ? $scope.wordList : $scope.overflowList;
+        var list = $scope.wordList.length <= 7 ? $scope.wordList :
+          $scope.overflowList;
+
         list.push($scope.selectedWord);
       } else if (picked) {
         $scope.alreadyPicked = true;
       } else {
         $scope.notAWord = true;
       }
-        $scope.clearBoard()
-    }
+      $scope.clearBoard();
+    };
 
     $scope.scoreBoard = function() {
       var wordList = $scope.wordList.concat($scope.overflowList);
@@ -100,13 +103,13 @@ module.exports = function(app) {
       $scope.clearBoard();
 
       for (var i = 0; i < wordList.length; i++) {
-        if(wordList[i].length < 8) {
+        if (wordList[i].length < 8) {
           $scope.score += wordList[i].length - 2;
         } else {
           $scope.score += 11;
         }
-      };
-    }
+      }
+    };
 
-  }])
-}
+  }]);
+};

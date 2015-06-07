@@ -11,7 +11,7 @@ var BoardActiveTree = function(board) {
 }
 
 BoardActiveTree.prototype.activateNode = function(location) {
-  var modifiers = [[1, 0], [0,1], [1, 1], [-1, 0], [0, -1],
+  var modifiers = [[1, 0], [0, 1], [1, 1], [-1, 0], [0, -1],
     [-1, -1], [-1, 1], [1, -1]];
   var x;
   var y;
