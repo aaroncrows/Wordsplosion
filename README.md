@@ -1,1 +1,1 @@
-A simple word game
+A simple word game. Angular client, Node backend.
