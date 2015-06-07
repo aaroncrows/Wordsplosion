@@ -26,9 +26,9 @@
     <div class="controls">
       <p>{{selectedWord}}<p>
       <button data-ng-click="clearBoard()">Clear</button>
-      <button data-ng-click="backspace()">Backspace</button>
       <button data-ng-click="submitWord()">Submit</button>
       <button data-ng-click="scoreBoard()">Score</button>
+      <button data-ng-click="newGame()">New Game</button>
       <span ng-if="alreadyPicked">Already picked that</span>
       <span ng-if="notAWord">Not in our dictionary!</span>
     </div>

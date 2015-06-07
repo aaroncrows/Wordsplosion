@@ -17,6 +17,7 @@ module.exports = function(app) {
     $scope.selectedWordObj = {};
 
     $scope.alreadyPicked = false;
+    $scope.notAWord = false;
     $scope.score;
 
     $scope.wordList = [];
@@ -30,7 +31,9 @@ module.exports = function(app) {
           && !$scope.isChosen(letter)){
         $scope.selectedWordObj.anyPicked = true;
         $scope.selectedWord += letter.letter;
+        //clear warnings
         $scope.alreadyPicked = false;
+        $scope.notAWord = false;
 
         if (!wordObj[loc[0]]) wordObj[loc[0]] = {};
         wordObj[loc[0]][loc[1]] = true;
@@ -59,23 +62,32 @@ module.exports = function(app) {
       $scope.selectedWordObj = {};
     }
 
-    $scope.backspace = function() {
-      $scope.selectedWord = $scope.selectedWord.slice(0, -1);
+    $scope.newGame = function() {
+      $http.get('/new-game').success(function(data) {
+        console.log(data);
+        $scope.board = data.board;
+        $scope.answers = data.solutions;
+        $scope.tree = new ActiveTree(data.board);
+      })
     }
 
     $scope.submitWord = function() {
       var wordList = $scope.wordList.concat($scope.overflowList);
       var picked = wordList.indexOf($scope.selectedWord) !== -1;
-      /*
-      *Only allows word submit if word longer than 2 characters in length
-      *and it's not in either of the word lists.
-      */
-      if ($scope.selectedWord.length > 2  && !picked) {
+      var isWord = $scope.answers[$scope.selectedWord];
 
+      /*
+      *Only allows word submit if word longer than 2 characters in length,
+      * not in either of the word lists and in the solution list.
+      */
+      if ($scope.selectedWord.length > 2  && !picked && isWord) {
+        console.log('in conditional', isWord)
         var list = $scope.wordList.length <= 7 ? $scope.wordList : $scope.overflowList;
         list.push($scope.selectedWord);
-      } else {
+      } else if (picked) {
         $scope.alreadyPicked = true;
+      } else {
+        $scope.notAWord = true;
       }
         $scope.clearBoard()
     }
