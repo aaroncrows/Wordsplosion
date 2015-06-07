@@ -1,37 +1,16 @@
 'use strict';
+
 var ActiveTree = require('../../lib/graph');
 
-function LetterObject(location) {
-  var alpha = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  var rand = Math.floor(Math.random() * 26);
-
-  this.letter = alpha[rand];
-  this.location = location;
-}
-
-var board = (function() {
-  var board = [];
-  var row;
-  var rand;
-
-  for (var i = 0; i < 4; i++) {
-    row = [];
-    for (var j = 0;  j < 4; j++) {
-      
-      row.push(new LetterObject([i, j]));
-    };
-    board.push(row)
-  };
-  return board;
-})();
-
-
 module.exports = function(app) {
-  app.controller('boardController', ['$scope', function($scope){
+  app.controller('boardController', ['$scope', '$http', function($scope, $http){
 
-    //game board and map of active nodes
-    $scope.board = board;
-    $scope.tree = new ActiveTree(board);
+    $http.get('/new-game').success(function(data) {
+      console.log(data);
+      $scope.board = data.board;
+      $scope.answers = data.solutions;
+      $scope.tree = new ActiveTree(data.board);
+    })
 
     //display word and object map for its letter locations
     $scope.selectedWord = '';
@@ -91,19 +70,14 @@ module.exports = function(app) {
       *Only allows word submit if word longer than 2 characters in length
       *and it's not in either of the word lists.
       */
-      //console.log(wordList, picked, wordList.indexOf($scope.selectedWord))
       if ($scope.selectedWord.length > 2  && !picked) {
-        console.log('1')
+
         var list = $scope.wordList.length <= 7 ? $scope.wordList : $scope.overflowList;
-        console.log('2')
         list.push($scope.selectedWord);
       } else {
-        console.log('3')
         $scope.alreadyPicked = true;
       }
-      console.log('4')
         $scope.clearBoard()
-      console.log('5')
     }
 
     $scope.scoreBoard = function() {

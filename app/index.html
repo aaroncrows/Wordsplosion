@@ -6,7 +6,7 @@
   <style href="./css/main.css" rel="stylesheet" type="text/css"></style>
 </head>
 <body data-ng-app="app">
-  <main data-ng-controller="boardController">
+  <main data-ng-controller="boardController" data-ng-cloak>
     <table class="board">
       <tr class="board-row" data-ng-repeat="row in board">
         <td class="board-square" data-ng-repeat="letter in row track by $index"
@@ -30,6 +30,7 @@
       <button data-ng-click="submitWord()">Submit</button>
       <button data-ng-click="scoreBoard()">Score</button>
       <span ng-if="alreadyPicked">Already picked that</span>
+      <span ng-if="notAWord">Not in our dictionary!</span>
     </div>
   </main>
   <script src="http://localhost:8080/webpack-dev-server.js"></script>
