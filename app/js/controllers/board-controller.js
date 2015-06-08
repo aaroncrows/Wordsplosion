@@ -6,7 +6,6 @@ module.exports = function(app) {
   app.controller('boardController', ['$scope', '$http', function($scope, $http) {
 
     $http.get('/new-game').success(function(data) {
-      console.log(data);
       $scope.board = data.board;
       $scope.answers = data.solutions;
       $scope.tree = new ActiveTree(data.board);
@@ -59,6 +58,11 @@ module.exports = function(app) {
     };
 
     $scope.clearBoard = function() {
+      $scope.wordList = [];
+      $scope.overflowList = [];
+      $scope.score = 0;
+      $scope.clearBoard();
+
       $scope.tree.deactivateAll($scope.board);
       $scope.selectedWord = '';
       $scope.selectedWordObj = {};
@@ -66,7 +70,6 @@ module.exports = function(app) {
 
     $scope.newGame = function() {
       $http.get('/new-game').success(function(data) {
-        console.log(data);
         $scope.board = data.board;
         $scope.answers = data.solutions;
         $scope.tree = new ActiveTree(data.board);
