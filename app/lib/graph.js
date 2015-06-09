@@ -15,7 +15,6 @@ BoardActiveTree.prototype.activateNode = function(location) {
     [-1, -1], [-1, 1], [1, -1]];
   var x;
   var y;
-
   for (var i = 0; i < modifiers.length; i++) {
     x = location[0] + modifiers[i][0];
     y = location[1] + modifiers[i][1];
