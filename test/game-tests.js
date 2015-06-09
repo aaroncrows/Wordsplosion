@@ -54,5 +54,23 @@ describe('Game tests', function() {
 
     expect(board).to.have.length(4);
     expect(board[0]).to.have.length(4);
+  });
+
+  it('should contain letter objects', function() {
+    var board = game.makeBoard(2);
+
+    expect(board[0][0]).to.be.an('object')
+  });
+
+  it('should take a passed in letter with letter object constructor', function() {
+    var letter = new game.LetterObject([0, 0], 'A');
+
+    expect(letter.letter).to.eql('A');
+  });
+
+  it('should put in a letter if one is not passed in', function() {
+    var letter = new game.LetterObject([0, 0]);
+
+    expect(letter.letter).to.be.a('string');
   })
 })
