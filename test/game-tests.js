@@ -30,14 +30,29 @@ describe('Game tests', function() {
 
     expect(results['TOP']).to.eql(true);
   });
+
   it('should find a word that goes around a corner', function() {
     var results = game.findWords(board);
 
     expect(results['STOP']).to.eql(true);
-  })
+  });
+
   it('should find a word that crosses over itself', function() {
     var results = game.findWords(board);
 
     expect(results['POSTED']).to.eql(true);
+  });
+
+  it('should not reuse letters', function() {
+    var results = game.findWords(board);
+
+    expect(results['STATE']).to.eql(undefined);
+  });
+
+  it('should make a board of the correct size', function() {
+    var board = game.makeBoard(4);
+
+    expect(board).to.have.length(4);
+    expect(board[0]).to.have.length(4);
   })
 })
