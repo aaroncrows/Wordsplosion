@@ -1,11 +1,14 @@
 {
   "name": "wordsplosion",
-  "version": "0.1.0",
+  "repository":"https://github.com/aaroncrows/Wordsplosion",
+  "version": "1.0.0",
   "description": "a simple word game",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "hot": "webpack-dev-server --content-base app/ --hot"
+    "test": "node node_modules/.bin/mocha",
+    "hot": "webpack-dev-server --content-base app/ --hot",
+    "build": "./node_modules/.bin/gulp build",
+    "postinstall": "npm run build"
   },
   "author": "Aaron Krause",
   "license": "MIT",

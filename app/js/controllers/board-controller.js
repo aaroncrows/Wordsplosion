@@ -83,10 +83,10 @@ module.exports = function(app) {
     $scope.submitWord = function() {
       var picked = $scope.wordList.indexOf($scope.selectedWord) !== -1;
       var isWord = $scope.answers[$scope.selectedWord];
-      /*
-      *Only allows word submit if word longer than 2 characters in length,
-      * not in either of the word lists and in the solution list.
-      */
+
+      //Only allows word submit if word longer than 2 characters in length,
+      //not in either of the word lists and in the solution list.
+
       if ($scope.selectedWord.length > 2  && !picked && isWord) {
         $scope.wordList.push($scope.selectedWord);
       } else if (picked) {
