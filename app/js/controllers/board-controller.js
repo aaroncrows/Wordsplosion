@@ -9,7 +9,6 @@ module.exports = function(app) {
       $scope.board = data.board;
       $scope.answers = data.solutions;
       $scope.tree = new ActiveTree(data.board);
-      console.log(data);
     });
 
     //display word and object map for its letter locations
@@ -21,7 +20,6 @@ module.exports = function(app) {
     $scope.score = 0;
 
     $scope.wordList = [];
-    $scope.overflowList = [];
 
     $scope.addLetter = function(letter) {
       var loc = letter.location;
@@ -63,16 +61,18 @@ module.exports = function(app) {
       $scope.tree.deactivateAll($scope.board);
       $scope.selectedWord = '';
       $scope.selectedWordObj = {};
+      $scope.notAWord = false;
+      $scope.alreadyPicked = false;
     };
 
     $scope.resetBoard = function() {
       $scope.wordList = [];
-      $scope.overflowList = [];
       $scope.score = 0;
-      $scope.clearBoard;
-    }
+      $scope.clearBoard();
+    };
 
     $scope.newGame = function() {
+      $scope.resetBoard();
       $http.get('/new-game').success(function(data) {
         $scope.board = data.board;
         $scope.answers = data.solutions;
@@ -81,20 +81,14 @@ module.exports = function(app) {
     };
 
     $scope.submitWord = function() {
-      var wordList = $scope.wordList.concat($scope.overflowList);
-      var picked = wordList.indexOf($scope.selectedWord) !== -1;
+      var picked = $scope.wordList.indexOf($scope.selectedWord) !== -1;
       var isWord = $scope.answers[$scope.selectedWord];
-      console.log('buhlist',wordList);
       /*
       *Only allows word submit if word longer than 2 characters in length,
       * not in either of the word lists and in the solution list.
       */
       if ($scope.selectedWord.length > 2  && !picked && isWord) {
-        var list = $scope.wordList.length <= 7 ? $scope.wordList :
-          $scope.overflowList;
-          console.log('made it!', list, $scope.selectedWord);
-        list.push($scope.selectedWord);
-        console.log(list);
+        $scope.wordList.push($scope.selectedWord);
       } else if (picked) {
         $scope.alreadyPicked = true;
       } else {
@@ -104,19 +98,18 @@ module.exports = function(app) {
     };
 
     $scope.scoreBoard = function() {
-      var wordList = $scope.wordList.concat($scope.overflowList);
-      $scope.wordList = [];
-      $scope.overflowList = [];
       $scope.score = 0;
-      $scope.resetBoard();
+      var list = $scope.wordList;
+      $scope.clearBoard();
 
-      for (var i = 0; i < wordList.length; i++) {
-        if (wordList[i].length < 8) {
-          $scope.score += wordList[i].length - 2;
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].length < 8) {
+          $scope.score += list[i].length - 2;
         } else {
           $scope.score += 11;
         }
       }
+
     };
 
   }]);

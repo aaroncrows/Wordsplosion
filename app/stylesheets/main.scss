@@ -1,8 +1,7 @@
 
-$color: rgb(120, 120, 255);
-$color-two: rgb(255, 255, 100);
-$color-three: rgb(50, 50, 255);
-$color-bright: rgb(255, 255, 0);
+$color-background: rgb(140, 140, 255);
+$color-medium: rgb(50, 50, 255);
+$color-bright: rgb(235, 235, 100);
 $color-bland: rgb(194, 178, 128);
 $color-chosen: rgb(0, 200, 200);
 
@@ -12,16 +11,27 @@ $color-chosen: rgb(0, 200, 200);
   -moz-user-select: none;
   user-select: none;
   cursor: default;
+}
 
+@mixin textbase($font-size) {
+  text-shadow: 0 0 2px white;
+  font-weight: bold;
+  font-family: Helvetica;
+  font-size: $font-size;
 }
 
 body {
-  background-color: $color;
+  background-color: $color-background;
 }
-
+html, body, main {
+  height: 100%;
+  margin: 0;
+}
 main {
   width: 60%;
+  background-color: rgba(0, 0, 255, 0.2);
   margin: 0 auto;
+  border: 1px solid $color-medium;
 }
 
 .activate {
@@ -31,6 +41,7 @@ main {
 .chosen {
   background-color: $color-chosen !important;
 }
+
 
 .board {
   float: left;
@@ -44,12 +55,12 @@ main {
     padding-left: 7px;
     border-radius: 12px;
     margin: 7px;
-    box-shadow: inset 0 0 0 3px $color-two,
-                inset 0 0 0 6px $color-three;
+    box-shadow: inset 0 0 0 3px $color-bright,
+                inset 0 0 0 6px $color-medium;
 
     .letter {
       @include noselect();
-      font-size: 50px;
+      @include textbase(50px);
       display: table-cell;
       font-family: Impact;
     }
@@ -59,44 +70,59 @@ main {
 .word-list {
   float: left;
   list-style: none;
-  width: 25%;
-  padding: 0;
+  width: 45%;
+  margin-left: 5%;
+  padding-left: 30px;
 
   li {
-    font-size: 15px;
-    font-size: 30px;
-    text-shadow: 0 0 2px white;
-    font-weight: bold;
-    font-family: Helvetica;
-    width: 50%;
+    @include textbase(30px);
+    float: left;
+    display: inline;
+    width: 33%;
   }
 }
 
 .controls {
   clear: both;
   margin: 0 auto;
-  width: 40%;
+  width: 100%;
+  padding: 0 10px;
+
   p {
     @include noselect();
-    font-size: 40px;
-    text-shadow: 0 0 2px white;
-    font-weight: bold;
-    font-family: Helvetica;
+    @include textbase(40px);
     min-height: 48px;
     margin: 0;
     text-align: center;
   }
 
-  button {
-    padding: 7px 15px;
-    border-radius: 10px;
-    outline: none;
-    border: 1px solid blue;
+  .score {
+    @include textbase(20px);
+    margin: 0;
+    float: left;
   }
-  span {
-    font-size: 18px;
-    color: red;
+
+  .buttons-errors {
+    margin: 0 auto;
+    width: 40%;
+
+    button {
+      padding: 7px 15px;
+      border-radius: 10px;
+      outline: none;
+      border: 1px solid blue;
+    }
+
+    span {
+      @include textbase(18px);
+      color: $color-bright;
+      margin: 0 auto;
+      text-align: center;
+      display: block;
+      min-height: 18px;
+    }
   }
+
 }
 
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {

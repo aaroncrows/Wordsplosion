@@ -19,21 +19,21 @@
     <ul class="word-list">
       <li data-ng-repeat="word in wordList track by $index">{{word}}</li>
     </ul>
-    <ul class="word-list">
-      <li data-ng-repeat="word in overflowList track by $index">{{word}}</li>
-    </ul>
-    <p class="score">score: {{score}}</p>
     <div class="controls">
-      <p>{{selectedWord}}<p>
-      <button data-ng-click="clearBoard()">Clear</button>
-      <button data-ng-click="submitWord()">Submit</button>
-      <button data-ng-click="scoreBoard()">Score</button>
-      <button data-ng-click="newGame()">New Game</button>
-      <span ng-if="alreadyPicked">Already picked that</span>
-      <span ng-if="notAWord">Not in our dictionary!</span>
+      <p>{{selectedWord}}</p>
+      <p class="score">score: {{score}}</p>
+      <div class="buttons-errors">
+        <button data-ng-click="clearBoard()">Clear</button>
+        <button data-ng-click="submitWord()">Submit</button>
+        <button data-ng-click="scoreBoard()">Score</button>
+        <button data-ng-click="newGame()">New Game</button>
+        <span ng-if="alreadyPicked">Already picked that</span>
+        <span ng-if="notAWord">Not in our dictionary!</span>
+      </div>
     </div>
   </main>
-  <script src="http://localhost:8080/webpack-dev-server.js"></script>
+  <!--uncomment (along with commented section in webpack.config) for webpack hot reload
+  <script src="http://localhost:8080/webpack-dev-server.js"></script>-->
   <script src="bundle.js"></script>
 </body>
 </html>
