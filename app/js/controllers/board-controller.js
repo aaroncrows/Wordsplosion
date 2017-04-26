@@ -1,114 +1,112 @@
-'use strict';
-
 var ActiveTree = require('../../lib/graph');
 
 module.exports = function(app) {
-  app.controller('boardController', ['$scope', '$http', function($scope, $http) {
+  app.controller('boardController', ['$http', function($http) {
+    var vc = this;
 
     $http.get('/new-game').then(function(data) {
       data = data.data;
-      $scope.board = data.board;
-      $scope.answers = data.solutions;
-      $scope.tree = new ActiveTree(data.board);
+      vc.board = data.board;
+      vc.answers = data.solutions;
+      vc.tree = new ActiveTree(data.board);
     });
 
     //display word and object map for its letter locations
-    $scope.selectedWord = '';
-    $scope.selectedWordObj = {};
+    vc.selectedWord = '';
+    vc.selectedWordObj = {};
 
-    $scope.alreadyPicked = false;
-    $scope.notAWord = false;
-    $scope.score = 0;
+    vc.alreadyPicked = false;
+    vc.notAWord = false;
+    vc.score = 0;
 
-    $scope.wordList = [];
+    vc.wordList = [];
 
-    $scope.addLetter = function(letter) {
+    vc.addLetter = function(letter) {
       var loc = letter.location;
-      var wordObj = $scope.selectedWordObj;
-      var activeLetter = $scope.isActive(letter);
-      var newBoard = !$scope.selectedWordObj.anyPicked;
-      var notChosen = !$scope.isChosen(letter);
+      var wordObj = vc.selectedWordObj;
+      var activeLetter = vc.isActive(letter);
+      var newBoard = !vc.selectedWordObj.anyPicked;
+      var notChosen = !vc.isChosen(letter);
 
       if ((activeLetter || newBoard) && notChosen) {
-        $scope.selectedWordObj.anyPicked = true;
-        $scope.selectedWord += letter.letter;
+        vc.selectedWordObj.anyPicked = true;
+        vc.selectedWord += letter.letter;
         //clear warnings
-        $scope.alreadyPicked = false;
-        $scope.notAWord = false;
+        vc.alreadyPicked = false;
+        vc.notAWord = false;
 
         if (!wordObj[loc[0]]) wordObj[loc[0]] = {};
         wordObj[loc[0]][loc[1]] = true;
 
-        $scope.tree.deactivateAll($scope.board);
-        $scope.tree.activateNode(letter.location);
+        vc.tree.deactivateAll(vc.board);
+        vc.tree.activateNode(letter.location);
       }
     };
 
-    $scope.isActive = function(letter) {
+    vc.isActive = function(letter) {
       var loc = letter.location;
-      return $scope.tree.map[loc[0]][loc[1]];
+      return vc.tree.map[loc[0]][loc[1]];
     };
 
     //checks picked letters for passed in letter
-    $scope.isChosen = function(letter) {
+    vc.isChosen = function(letter) {
       var loc = letter.location;
-      var word = $scope.selectedWordObj;
+      var word = vc.selectedWordObj;
 
       return (word[loc[0]] && word[loc[0]][loc[1]]);
     };
 
-    $scope.clearBoard = function() {
-
-      $scope.tree.deactivateAll($scope.board);
-      $scope.selectedWord = '';
-      $scope.selectedWordObj = {};
-      $scope.notAWord = false;
-      $scope.alreadyPicked = false;
+    vc.clearBoard = function() {
+      vc.tree.deactivateAll(vc.board);
+      vc.selectedWord = '';
+      vc.selectedWordObj = {};
+      vc.notAWord = false;
+      vc.alreadyPicked = false;
     };
 
-    $scope.resetBoard = function() {
-      $scope.wordList = [];
-      $scope.score = 0;
-      $scope.clearBoard();
+    vc.resetBoard = function() {
+      vc.wordList = [];
+      vc.score = 0;
+      vc.clearBoard();
     };
 
-    $scope.newGame = function() {
-      $scope.resetBoard();
+    vc.newGame = function() {
+      vc.resetBoard();
       $http.get('/new-game').then(function(data) {
         data = data.data;
-        $scope.board = data.board;
-        $scope.answers = data.solutions;
-        $scope.tree = new ActiveTree(data.board);
+        vc.board = data.board;
+        vc.answers = data.solutions;
+        vc.tree = new ActiveTree(data.board);
       });
     };
 
-    $scope.submitWord = function() {
-      var picked = $scope.wordList.indexOf($scope.selectedWord) !== -1;
-      var isWord = $scope.answers[$scope.selectedWord];
+    vc.submitWord = function() {
+      var picked = vc.wordList.indexOf(vc.selectedWord) !== -1;
+      var isWord = vc.answers[vc.selectedWord];
 
       //Only allows word submit if word longer than 2 characters in length,
       //not in either of the word lists and in the solution list.
 
-      if ($scope.selectedWord.length > 2 && !picked && isWord) {
-        $scope.wordList.push($scope.selectedWord);
+      if (vc.selectedWord.length > 2 && !picked && isWord) {
+        vc.wordList.push(vc.selectedWord);
       } else if (picked) {
-        $scope.alreadyPicked = true;
+        vc.alreadyPicked = true;
       } else {
-        $scope.notAWord = true;
+        vc.notAWord = true;
       }
-      $scope.clearBoard();
+      vc.clearBoard();
     };
 
-    $scope.scoreBoard = function() {
-      $scope.score = 0;
-      var list = $scope.wordList;
-      $scope.clearBoard();
+    vc.scoreBoard = function() {
+      vc.score = 0;
+      var list = vc.wordList;
+      vc.clearBoard();
 
       for (var i = 0; i < list.length; i++) {
         if (list[i].length < 8) {
-          $scope.score += list[i].length - 2;
+          vc.score += list[i].length - 2;
         } else {
-          $scope.score += 11;
+          vc.score += 11;
         }
       }
 

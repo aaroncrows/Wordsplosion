@@ -6,34 +6,32 @@
   <style href="./css/main.css" rel="stylesheet" type="text/css"></style>
 </head>
 <body data-ng-app="app">
-  <main data-ng-controller="boardController" data-ng-cloak>
+  <main data-ng-controller="boardController as boardCtrl" data-ng-cloak>
     <table class="board">
-      <tr class="board-row" data-ng-repeat="row in board">
+      <tr class="board-row" data-ng-repeat="row in boardCtrl.board">
         <td class="board-square" data-ng-repeat="letter in row track by $index"
-          data-ng-click="addLetter(letter)"
-          data-ng-class="{activate: (isActive(letter) && !isChosen(letter)), chosen: isChosen(letter)}">
+          data-ng-click="boardCtrl.addLetter(letter)"
+          data-ng-class="{activate: (boardCtrl.isActive(letter) && !boardCtrl.isChosen(letter)), chosen: boardCtrl.isChosen(letter)}">
           <p class="letter">{{letter.letter}}</p>
         </td>
       </tr>
     </table>
     <ul class="word-list">
-      <li data-ng-repeat="word in wordList track by $index">{{word}}</li>
+      <li data-ng-repeat="word in boardCtrl.wordList track by $index">{{word}}</li>
     </ul>
     <div class="controls">
-      <p>{{selectedWord}}</p>
-      <p class="score">score: {{score}}</p>
+      <p>{{boardCtrl.selectedWord}}</p>
+      <p class="score">score: {{boardCtrl.score}}</p>
       <div class="buttons-errors">
-        <button data-ng-click="clearBoard()">Clear</button>
-        <button data-ng-click="submitWord()">Submit</button>
-        <button data-ng-click="scoreBoard()">Score</button>
-        <button data-ng-click="newGame()">New Game</button>
-        <span ng-if="alreadyPicked">Already picked that</span>
-        <span ng-if="notAWord">Not in our dictionary!</span>
+        <button data-ng-click="boardCtrl.clearBoard()">Clear</button>
+        <button data-ng-click="boardCtrl.submitWord()">Submit</button>
+        <button data-ng-click="boardCtrl.scoreBoard()">Score</button>
+        <button data-ng-click="boardCtrl.newGame()">New Game</button>
+        <span ng-if="boardCtrl.alreadyPicked">Already picked that</span>
+        <span ng-if="boardCtrl.notAWord">Not in our dictionary!</span>
       </div>
     </div>
   </main>
-  <!--uncomment (along with commented section in webpack.config) for webpack hot reload
-  <script src="http://localhost:8080/webpack-dev-server.js"></script>-->
   <script src="bundle.js"></script>
 </body>
 </html>
