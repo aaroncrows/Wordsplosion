@@ -5,7 +5,8 @@ var ActiveTree = require('../../lib/graph');
 module.exports = function(app) {
   app.controller('boardController', ['$scope', '$http', function($scope, $http) {
 
-    $http.get('/new-game').success(function(data) {
+    $http.get('/new-game').then(function(data) {
+      data = data.data;
       $scope.board = data.board;
       $scope.answers = data.solutions;
       $scope.tree = new ActiveTree(data.board);
@@ -73,7 +74,8 @@ module.exports = function(app) {
 
     $scope.newGame = function() {
       $scope.resetBoard();
-      $http.get('/new-game').success(function(data) {
+      $http.get('/new-game').then(function(data) {
+        data = data.data;
         $scope.board = data.board;
         $scope.answers = data.solutions;
         $scope.tree = new ActiveTree(data.board);
@@ -87,7 +89,7 @@ module.exports = function(app) {
       //Only allows word submit if word longer than 2 characters in length,
       //not in either of the word lists and in the solution list.
 
-      if ($scope.selectedWord.length > 2  && !picked && isWord) {
+      if ($scope.selectedWord.length > 2 && !picked && isWord) {
         $scope.wordList.push($scope.selectedWord);
       } else if (picked) {
         $scope.alreadyPicked = true;

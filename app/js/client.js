@@ -1,8 +1,6 @@
-'use strict';
-
 require('angular');
 
-require('../stylesheets/main.scss')
+require('../stylesheets/main.scss');
 
 var app = angular.module('app', []);
 

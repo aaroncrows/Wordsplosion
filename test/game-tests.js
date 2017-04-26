@@ -1,5 +1,3 @@
-'use strict';
-
 var expect = require('chai').expect;
 
 var game = require('../lib/game');
@@ -13,10 +11,9 @@ describe('Game tests', function() {
       ['A', 'T', 'D']
     ];
 
-    var row;
     var newLetter;
     for (var i = 0; i < letters.length; i++) {
-      board.push([])
+      board.push([]);
       for (var j = 0; j < letters[i].length; j++) {
         newLetter = new game.LetterObject([i, j], letters[i][j]);
         board[i].push(newLetter);
@@ -59,7 +56,7 @@ describe('Game tests', function() {
   it('should contain letter objects', function() {
     var board = game.makeBoard(2);
 
-    expect(board[0][0]).to.be.an('object')
+    expect(board[0][0]).to.be.an('object');
   });
 
   it('should take a passed in letter with letter object constructor', function() {
@@ -72,5 +69,5 @@ describe('Game tests', function() {
     var letter = new game.LetterObject([0, 0]);
 
     expect(letter.letter).to.be.a('string');
-  })
-})
+  });
+});

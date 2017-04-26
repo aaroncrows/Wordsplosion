@@ -1,5 +1,3 @@
-'use strict';
-
 var BoardActiveTree = function(board) {
   this.map = {};
   for (var i = 0; i < board.length; i++) {
@@ -8,7 +6,7 @@ var BoardActiveTree = function(board) {
       this.map[i][j] = false;
     }
   }
-}
+};
 
 BoardActiveTree.prototype.activateNode = function(location) {
   var modifiers = [[1, 0], [0, 1], [1, 1], [-1, 0], [0, -1],
@@ -24,7 +22,7 @@ BoardActiveTree.prototype.activateNode = function(location) {
     }
   };
   this.map[location[0]][location[1]] = true;
-}
+};
 
 BoardActiveTree.prototype.deactivateAll = function(board) {
   for (var i = 0; i < board.length; i++) {
@@ -33,5 +31,6 @@ BoardActiveTree.prototype.deactivateAll = function(board) {
       this.map[i][j] = false;
     }
   }
-}
+};
+
 module.exports = BoardActiveTree;
