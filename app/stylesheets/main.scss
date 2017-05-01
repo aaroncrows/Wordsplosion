@@ -1,3 +1,4 @@
+@import './reset.scss';
 
 $color-background: rgb(140, 140, 255);
 $color-medium: rgb(50, 50, 255);
@@ -23,12 +24,9 @@ $color-chosen: rgb(0, 200, 200);
 body {
   background-color: $color-background;
 }
-html, body, main {
-  height: 100%;
-  margin: 0;
-}
+
 main {
-  width: 60%;
+  max-width: 900px;
   background-color: rgba(0, 0, 255, 0.2);
   margin: 0 auto;
   border: 1px solid $color-medium;
@@ -42,27 +40,42 @@ main {
   background-color: $color-chosen !important;
 }
 
-
 .board {
-  float: left;
-  border-spacing: 10px;
-  width: 40%;
+   margin: 0 auto;
+   max-width: 400px;
 
   .board-square {
-    background-color:  $color-bland;
-    height: 90px;
-    width: 60px;
-    padding-left: 7px;
+    background-color: $color-bland;
+    width: 22%;
+    padding: 20px 0;
+    text-align: center;
     border-radius: 12px;
-    margin: 7px;
-    box-shadow: inset 0 0 0 3px $color-bright,
-                inset 0 0 0 6px $color-medium;
+    margin-left: 2%;
+    box-shadow: inset 0 0 0 3px $color-medium;
+    transition: 300ms;
+    &:hover {
+      box-shadow: inset 0 0 0 3px $color-bright;
+    }
+
+    float: left;
+    &:first-child {
+      margin-left: 0;
+    }
 
     .letter {
       @include noselect();
       @include textbase(50px);
-      display: table-cell;
       font-family: Impact;
+    }
+  }
+
+  .board-row {
+    margin-bottom: 2%;
+
+    &:after {
+      content: "";
+      display: table;
+      clear: both;
     }
   }
 }
@@ -111,6 +124,12 @@ main {
       border-radius: 10px;
       outline: none;
       border: 1px solid blue;
+      cursor: pointer;
+      transition: background-color 300ms;
+
+      &:hover {
+        background-color: $color-chosen;
+      }
     }
 
     span {
