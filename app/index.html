@@ -7,18 +7,18 @@
 </head>
 <body data-ng-app="app">
   <main data-ng-controller="boardController as boardCtrl" data-ng-cloak>
-    <div class="board">
-      <div class="board-row" data-ng-repeat="row in boardCtrl.board">
-        <div class="board-square" data-ng-repeat="letter in row track by $index"
-          data-ng-click="boardCtrl.addLetter(letter)"
-          data-ng-class="{activate: (boardCtrl.isActive(letter) && !boardCtrl.isChosen(letter)), chosen: boardCtrl.isChosen(letter)}">
-          <p class="letter">{{letter.letter}}</p>
+    <div class="game-area">
+      <div class="board">
+        <div class="board-row" data-ng-repeat="row in boardCtrl.board">
+          <div class="board-square" data-ng-repeat="letter in row track by $index"
+            data-ng-click="boardCtrl.addLetter(letter)"
+            data-ng-class="{activate: (boardCtrl.isActive(letter) && !boardCtrl.isChosen(letter)), chosen: boardCtrl.isChosen(letter)}">
+            <p class="letter">{{letter.letter}}</p>
+          </div>
         </div>
       </div>
-    </div>
-    <ul class="word-list">
-      <li data-ng-repeat="word in boardCtrl.wordList track by $index">{{word}}</li>
-    </ul>
+      <word-list words="boardCtrl.wordList"></word-list>
+    <div>
     <div class="controls">
       <p>{{boardCtrl.selectedWord}}</p>
       <p class="score">score: {{boardCtrl.score}}</p>

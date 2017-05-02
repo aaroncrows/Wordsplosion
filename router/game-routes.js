@@ -7,10 +7,9 @@ module.exports = function(app) {
   app.get('/new-game', function(req, res) {
     var board = game.makeBoard(BOARD_SIZE);
     var solutions = game.findWords(board);
-
     res.json({
       board: board,
       solutions: solutions
-    })
-  })
-}
+    });
+  });
+};
