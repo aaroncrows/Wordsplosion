@@ -41,7 +41,7 @@ gulp.task('webpack', ['clean'], function() {
 });
 
 gulp.task('watch', function() {
-  gulp.watch([paths.js, paths.sass], ['build']);
+  gulp.watch([paths.js, paths.sass, './app/**/*.html'], ['build']);
 });
 
 gulp.task('default', ['lint', 'clean', 'sass', 'webpack', 'copy']);

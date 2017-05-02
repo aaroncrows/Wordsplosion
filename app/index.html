@@ -7,16 +7,9 @@
 </head>
 <body data-ng-app="app">
   <main data-ng-controller="boardController as boardCtrl" data-ng-cloak>
-    <div class="game-area">
-      <div class="board">
-        <div class="board-row" data-ng-repeat="row in boardCtrl.board">
-          <div class="board-square" data-ng-repeat="letter in row track by $index"
-            data-ng-click="boardCtrl.addLetter(letter)"
-            data-ng-class="{activate: (boardCtrl.isActive(letter) && !boardCtrl.isChosen(letter)), chosen: boardCtrl.isChosen(letter)}">
-            <p class="letter">{{letter.letter}}</p>
-          </div>
-        </div>
-      </div>
+	  <div class="game-area">
+      <game-board board="boardCtrl.board" is-active="boardCtrl.isActive" is-chosen="boardCtrl.isChosen" add-letter="boardCtrl.addLetter">
+      </game-board>
       <word-list words="boardCtrl.wordList"></word-list>
     <div>
     <div class="controls">
@@ -27,8 +20,8 @@
         <button data-ng-click="boardCtrl.submitWord()">Submit</button>
         <button data-ng-click="boardCtrl.scoreBoard()">Score</button>
         <button data-ng-click="boardCtrl.newGame()">New Game</button>
-        <span ng-if="boardCtrl.alreadyPicked">Already picked that</span>
-        <span ng-if="boardCtrl.notAWord">Not in our dictionary!</span>
+        <span ng-hide="!boardCtrl.alreadyPicked">Already picked that</span>
+        <span ng-hide="!boardCtrl.notAWord">Not in our dictionary!</span>
       </div>
     </div>
   </main>

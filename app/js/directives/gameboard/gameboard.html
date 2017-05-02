@@ -1,0 +1,10 @@
+<div class="board">
+    <div class="board-row" data-ng-repeat="row in board">
+      <div class="board-square" data-ng-repeat="letter in row track by $index"
+        data-ng-click="addLetter(letter)"
+        data-ng-class="{activate: (isActive(letter) && !isChosen(letter)), chosen: isChosen(letter)}">
+        <p class="letter">{{letter.letter}}</p>
+      </div>
+    </div>
+</div>
+

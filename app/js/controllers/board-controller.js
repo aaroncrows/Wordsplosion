@@ -81,7 +81,6 @@ function BoardController(gameService) {
   vm.submitWord = function() {
     var picked = vm.wordList.indexOf(vm.selectedWord) !== -1;
     var isWord = vm.answers[vm.selectedWord];
-
     //Only allows word submit if word longer than 2 characters in length,
     //not in either of the word lists and in the solution list.
 
