@@ -1,5 +1,3 @@
-var htmlLoader = require('html-loader');
-
 module.exports = {
   entry: [__dirname + '/app/js/client.js'],
   output: {
