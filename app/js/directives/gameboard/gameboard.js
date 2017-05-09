@@ -4,10 +4,14 @@ function GameBoard() {
   return {
     scope: {
       board: '=',
-      isActive: '=',
-      isChosen: '=',
       addLetter: '='
     },
+    controller: function(BoardService) {
+      this.isActive = BoardService.isActive;
+      this.isChosen = BoardService.isChosen;
+    },
+    bindToController: true,
+    controllerAs: 'boardCtrl',
     template: template
   };
 }

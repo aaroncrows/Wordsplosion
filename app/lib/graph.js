@@ -1,8 +1,11 @@
-var BoardActiveTree = function(board) {
+var BoardActiveTree = function(height, width) {
   this.map = {};
-  for (var i = 0; i < board.length; i++) {
+  this.boardHeight = height;
+  this.boardWidth = width;
+
+  for (var i = 0; i < height; i++) {
     this.map[i] = {};
-    for (var j = 0; j < board[i].length; j++) {
+    for (var j = 0; j < width; j++) {
       this.map[i][j] = false;
     }
   }
@@ -24,10 +27,10 @@ BoardActiveTree.prototype.activateNode = function(location) {
   this.map[location[0]][location[1]] = true;
 };
 
-BoardActiveTree.prototype.deactivateAll = function(board) {
-  for (var i = 0; i < board.length; i++) {
+BoardActiveTree.prototype.deactivateAll = function() {
+  for (var i = 0; i < this.boardHeight; i++) {
     this.map[i] = {};
-    for (var j = 0; j < board[i].length; j++) {
+    for (var j = 0; j < this.boardWidth; j++) {
       this.map[i][j] = false;
     }
   }
