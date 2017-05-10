@@ -1,4 +1,4 @@
-var BoardActiveTree = function(height, width) {
+var ActiveSquareMap = function(height, width) {
   this.map = {};
   this.boardHeight = height;
   this.boardWidth = width;
@@ -11,7 +11,7 @@ var BoardActiveTree = function(height, width) {
   }
 };
 
-BoardActiveTree.prototype.activateNode = function(location) {
+ActiveSquareMap.prototype.activateNode = function(location) {
   var modifiers = [[1, 0], [0, 1], [1, 1], [-1, 0], [0, -1],
     [-1, -1], [-1, 1], [1, -1]];
   var x;
@@ -27,7 +27,7 @@ BoardActiveTree.prototype.activateNode = function(location) {
   this.map[location[0]][location[1]] = true;
 };
 
-BoardActiveTree.prototype.deactivateAll = function() {
+ActiveSquareMap.prototype.deactivateAll = function() {
   for (var i = 0; i < this.boardHeight; i++) {
     this.map[i] = {};
     for (var j = 0; j < this.boardWidth; j++) {
@@ -36,4 +36,4 @@ BoardActiveTree.prototype.deactivateAll = function() {
   }
 };
 
-module.exports = BoardActiveTree;
+module.exports = ActiveSquareMap;

@@ -3,6 +3,7 @@ function GameService($http) {
   var wordList = [];
   var answers;
   var board;
+  var score;
 
   service.hasBeenPicked = function(word) {
     return wordList.indexOf(word) !== -1;
@@ -10,6 +11,10 @@ function GameService($http) {
 
   service.isWord = function(word) {
     return answers[word];
+  };
+
+  service.getWordList = function() {
+    return wordList;
   };
 
   service.newGame = function() {
@@ -28,10 +33,17 @@ function GameService($http) {
     var isWord = service.isWord(word);
     //Only allows word submit if word longer than 2 characters in length,
     //not in either of the word lists and in the solution list.
-
     if (word.length > 2 && !picked && isWord) {
-      vm.wordList.push(word);
+      wordList.push(word);
     }
+  };
+
+  service.scoreBoard = function() {
+    score = wordList.reduce(function(a, c) {
+      return a + (c.length >= 8 ? c.length - 2 : 11);
+    }, 0);
+
+    return score;
   };
 
   service.getBoard = function() {

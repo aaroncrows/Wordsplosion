@@ -1,12 +1,10 @@
-var ActiveTree = require('../../lib/graph');
+var ActiveSquareMap = require('../../lib/active_square_map');
 
-function BoardService(gameService) {
+function BoardService() {
   var service = {};
-  var tree;
   var selectedWord = '';
   var selectedCoordinates = {};
-
-  var wordList = [];
+  var tree;
 
   service.isChosen = function(letter) {
     var loc = letter.location;
@@ -16,7 +14,7 @@ function BoardService(gameService) {
   };
 
   service.initializeBoard = function(height, width) {
-    tree = new ActiveTree(height, width);
+    tree = new ActiveSquareMap(height, width);
   };
 
   service.isActive = function(letter) {
@@ -38,6 +36,7 @@ function BoardService(gameService) {
       tree.activateNode(letter.location);
       return true;
     }
+
     return false;
   };
 
@@ -71,7 +70,5 @@ function BoardService(gameService) {
 
   return service;
 }
-
-BoardService.$inject = ['GameService'];
 
 module.exports = BoardService;
