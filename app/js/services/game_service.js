@@ -1,16 +1,25 @@
 function GameService($http) {
   var service = {};
   var wordList = [];
-  var answers;
+  var allWords;
   var board;
   var score;
+
+  if (!localStorage.allWords) {
+    $http.get('/words').then(function(data) {
+      localStorage.allWords = JSON.stringify(data.data);
+      allWords = data.data;
+    });
+  } else {
+    allWords = JSON.parse(localStorage.allWords);
+  }
 
   service.hasBeenPicked = function(word) {
     return wordList.indexOf(word) !== -1;
   };
 
   service.isWord = function(word) {
-    return answers[word.toUpperCase()];
+    return allWords[word.toUpperCase()];
   };
 
   service.getWordList = function() {
@@ -21,7 +30,6 @@ function GameService($http) {
     return $http.get('/new-game').then(function(data) {
       data = data.data;
       board = data.board;
-      answers = data.solutions;
 
       wordList = [];
       return data;
