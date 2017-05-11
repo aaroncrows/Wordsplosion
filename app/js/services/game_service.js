@@ -10,7 +10,7 @@ function GameService($http) {
   };
 
   service.isWord = function(word) {
-    return answers[word];
+    return answers[word.toUpperCase()];
   };
 
   service.getWordList = function() {
@@ -40,7 +40,7 @@ function GameService($http) {
 
   service.scoreBoard = function() {
     score = wordList.reduce(function(a, c) {
-      return a + (c.length >= 8 ? c.length - 2 : 11);
+      return a + (c.length <= 8 ? c.length - 2 : 11);
     }, 0);
 
     return score;
