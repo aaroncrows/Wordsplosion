@@ -24,8 +24,9 @@
     </div>
     <div class="controls">
       <p>
-        <span ng-hide="!boardCtrl.alreadyPicked">Already picked that</span>
-        <span ng-hide="!boardCtrl.notAWord">Not in our dictionary!</span>
+        <span ng-if="boardCtrl.alreadyPicked">You already picked that.</span>
+        <span ng-if="boardCtrl.notAWord">That's not in our dictionary.</span>
+        <span ng-if="boardCtrl.tooShort">Must be three or more letters.</span>
         {{boardCtrl.selectedWord}}
       </p>
       <p class="score">score: {{boardCtrl.score}}</p>

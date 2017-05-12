@@ -3,6 +3,7 @@ function BoardController(gameService, boardService) {
 
   vm.alreadyPicked = false;
   vm.notAWord = false;
+  vm.tooShort = false;
   vm.selectedWord = '';
 
   vm.addLetter = function(letter) {
@@ -16,6 +17,7 @@ function BoardController(gameService, boardService) {
     vm.selectedWord = '';
     vm.notAWord = false;
     vm.alreadyPicked = false;
+    vm.tooShort = false;
   };
 
   vm.newGame = function() {
@@ -30,13 +32,11 @@ function BoardController(gameService, boardService) {
 
   vm.submitWord = function() {
     var word = vm.selectedWord;
-    var picked = gameService.hasBeenPicked(word);
-    var isWord = gameService.isWord(word);
 
     vm.clearBoard();
-
-    if (!isWord) return vm.notAWord = true;
-    if (picked) return vm.alreadyPicked = true;
+    if (word.length <= 2) return vm.tooShort = true;
+    if (!gameService.isWord(word)) return vm.notAWord = true;
+    if (gameService.hasBeenPicked(word)) return vm.alreadyPicked = true;
 
     gameService.verifyWord(word);
   };

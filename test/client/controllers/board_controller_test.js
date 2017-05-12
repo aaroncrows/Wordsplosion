@@ -59,35 +59,42 @@ describe('BoardController', function() {
   });
 
   it('submitWord: should set notAWord to true on invalid word', function() {
-    var isWord = spyOn(testGameService, 'isWord').and.returnValue(false);
-    var hasBeenPicked = spyOn(testGameService, 'hasBeenPicked');
     var verifyWord = spyOn(testGameService, 'verifyWord');
-    var clearBoard = spyOn(boardCtrl, 'clearBoard');
+    var isWord = spyOn(testGameService, 'isWord').and.returnValue(false);
 
+    boardCtrl.selectedWord = 'xxxx';
     boardCtrl.submitWord();
 
     expect(isWord).toHaveBeenCalled();
-    expect(hasBeenPicked).toHaveBeenCalled();
-    expect(clearBoard).toHaveBeenCalled();
     expect(verifyWord).not.toHaveBeenCalled();
 
     expect(boardCtrl.notAWord).toBe(true);
   });
 
   it('submitWord: should set alreadyPick to true on picked letter', function() {
-    var isWord = spyOn(testGameService, 'isWord').and.returnValue(true);
-    var hasBeenPicked = spyOn(testGameService, 'hasBeenPicked').and.returnValue(true);
     var verifyWord = spyOn(testGameService, 'verifyWord');
-    var clearBoard = spyOn(boardCtrl, 'clearBoard');
 
+    var hasBeenPicked = spyOn(testGameService, 'hasBeenPicked').and.returnValue(true);
+    spyOn(testGameService, 'isWord').and.returnValue(true);
+
+    boardCtrl.selectedWord = 'test';
     boardCtrl.submitWord();
 
-    expect(isWord).toHaveBeenCalled();
     expect(hasBeenPicked).toHaveBeenCalled();
-    expect(clearBoard).toHaveBeenCalled();
     expect(verifyWord).not.toHaveBeenCalled();
 
     expect(boardCtrl.alreadyPicked).toBe(true);
+  });
+
+  it('submitWord: should set tooShort to true for length less than 3', function() {
+    var verifyWord = spyOn(testGameService, 'verifyWord');
+
+    boardCtrl.selectedWord = '';
+    boardCtrl.submitWord();
+
+    expect(verifyWord).not.toHaveBeenCalled();
+
+    expect(boardCtrl.tooShort).toBe(true);
   });
 
   it('submitWord: should verify word if it passes both checks', function() {
@@ -95,6 +102,8 @@ describe('BoardController', function() {
     var hasBeenPicked = spyOn(testGameService, 'hasBeenPicked').and.returnValue(false);
     var verifyWord = spyOn(testGameService, 'verifyWord');
     var clearBoard = spyOn(boardCtrl, 'clearBoard');
+
+    boardCtrl.selectedWord = 'test';
 
     boardCtrl.submitWord();
 
