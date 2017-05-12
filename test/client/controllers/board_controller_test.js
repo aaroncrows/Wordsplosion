@@ -5,14 +5,14 @@ require('../../../app/js/client');
 
 var testBoardService = {
   addLetter: function() {},
-  deactivateAll: function() {}
+  deactivateAll: function() {},
+  newGame: function() { return { then: function() {} }; }
 };
 
 var testGameService = {
   isWord: function() {},
   verifyWord: function() {},
   hasBeenPicked: function() {},
-  newGame: function() { return { then: function() {} }; },
   scoreBoard: function() {}
 };
 

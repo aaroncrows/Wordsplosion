@@ -2,7 +2,6 @@ function GameService($http) {
   var service = {};
   var wordList = [];
   var allWords;
-  var board;
   var score;
 
   if (!localStorage.allWords) {
@@ -26,14 +25,9 @@ function GameService($http) {
     return wordList;
   };
 
-  service.newGame = function() {
-    return $http.get('/new-game').then(function(data) {
-      data = data.data;
-      board = data.board;
-
-      wordList = [];
-      return data;
-    });
+  service.resetGame = function() {
+    wordList = [];
+    score = 0;
   };
 
   service.verifyWord = function(word) {

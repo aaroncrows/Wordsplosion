@@ -9,6 +9,7 @@ function GameBoard() {
     controller: function(BoardService) {
       this.isActive = BoardService.isActive;
       this.isChosen = BoardService.isChosen;
+      // this.board = BoardService.getBoard();
     },
     bindToController: true,
     controllerAs: 'boardCtrl',

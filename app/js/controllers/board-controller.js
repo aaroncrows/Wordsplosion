@@ -3,8 +3,10 @@ function BoardController(gameService, boardService) {
 
   vm.alreadyPicked = false;
   vm.notAWord = false;
+  vm.selectedWord = '';
 
   vm.addLetter = function(letter) {
+    if (!vm.selectedWord) vm.clearBoard();
     var validLetter = boardService.addLetter(letter);
     if (validLetter) vm.selectedWord += letter.letter;
   };
@@ -17,9 +19,9 @@ function BoardController(gameService, boardService) {
   };
 
   vm.newGame = function() {
-    gameService.newGame()
+    boardService.newGame()
       .then(function(data) {
-        vm.board = gameService.getBoard();
+        vm.board = boardService.getBoard();
         vm.answers = data.solutions;
         boardService.initializeBoard(data.board.length, data.board[0].length);
         vm.clearBoard();
