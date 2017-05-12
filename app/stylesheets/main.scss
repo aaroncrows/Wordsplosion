@@ -31,11 +31,53 @@ body {
   background-color: $color-background;
 }
 
+html, body, main {
+  height: 100%;
+  min-height: 600px;
+}
+
 main {
   max-width: 900px;
-  background-color: rgba(0, 0, 255, 0.2);
+  background-color: rgba(200, 200, 255, 0.5);
   margin: 0 auto;
   border: 1px solid $color-medium;
+
+}
+
+nav {
+  padding: 20px 20px;
+
+  button {
+    width: 10%;
+    margin-left: 20px;
+    float: right;
+  }
+
+  h1 {
+    @include textbase(40px);
+    text-align: center;
+    float: left;
+  }
+
+  &:after {
+    @include clearfix();
+  }
+}
+
+button {
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 20px;
+  outline: none;
+  border: 2px solid $color-medium;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: $color-chosen;
+    border: 2px solid $color-bright;
+  }
 }
 
 .activate {
@@ -45,9 +87,11 @@ main {
 .chosen {
   background-color: $color-chosen !important;
 }
+
+
 .game-area {
   margin: 0 auto;
-  max-width: 600px;
+  padding: 0 20px;
   height: 390px;
 
   .board {
@@ -88,25 +132,31 @@ main {
       }
     }
   }
-
-  .word-list {
+  .results {
+    height: 100%;
+    width: 40%;
     float: left;
-    list-style: none;
-    width: 30%;
-    margin-left: 5%;
-    padding-left: 30px;
-    overflow: scroll;
 
-    li {
-      @include textbase(30px);
-      margin-bottom: 3%;
+    .word-list {
+      margin-left: 5%;
+      padding-left: 30px;
+      overflow: scroll;
+      height: 88%;
+
+
+      li {
+        @include textbase(30px);
+        margin-bottom: 3%;
+      }
+    }
+    button {
+      width: 48%;
     }
   }
 }
 
 .controls {
   clear: both;
-  margin: 0 auto;
   width: 100%;
   padding: 0 10px;
 
@@ -118,37 +168,18 @@ main {
     text-align: center;
   }
 
+  span {
+    @include textbase(18px);
+    color: $color-bright;
+    margin: 0 auto;
+    text-align: center;
+    display: block;
+    min-height: 18px;
+  }
+
   .score {
     @include textbase(20px);
     margin: 0;
-    float: left;
-  }
-
-  .buttons-errors {
-    margin: 0 auto;
-    width: 40%;
-
-    button {
-      padding: 7px 15px;
-      border-radius: 10px;
-      outline: none;
-      border: 1px solid blue;
-      cursor: pointer;
-      transition: background-color 300ms;
-
-      &:hover {
-        background-color: $color-chosen;
-      }
-    }
-
-    span {
-      @include textbase(18px);
-      color: $color-bright;
-      margin: 0 auto;
-      text-align: center;
-      display: block;
-      min-height: 18px;
-    }
   }
 }
 

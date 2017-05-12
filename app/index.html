@@ -7,22 +7,28 @@
 </head>
 <body data-ng-app="app">
   <main data-ng-controller="boardController as boardCtrl" data-ng-cloak>
+
+    <nav>
+      <h1>WORDSPLOSION</h1>
+      <button data-ng-click="boardCtrl.scoreBoard()">Score</button>
+      <button data-ng-click="boardCtrl.newGame()">New</button>
+    </nav>
 	  <div class="game-area">
       <game-board board="boardCtrl.board" is-active="boardCtrl.isActive" is-chosen="boardCtrl.isChosen" add-letter="boardCtrl.addLetter">
       </game-board>
-      <word-list words="boardCtrl.wordList"></word-list>
-    <div>
-    <div class="controls">
-      <p>{{boardCtrl.selectedWord}}</p>
-      <p class="score">score: {{boardCtrl.score}}</p>
-      <div class="buttons-errors">
-        <button data-ng-click="boardCtrl.clearBoard()">Clear</button>
+      <div class="results">
+        <word-list words="boardCtrl.wordList"></word-list>
         <button data-ng-click="boardCtrl.submitWord()">Submit</button>
-        <button data-ng-click="boardCtrl.scoreBoard()">Score</button>
-        <button data-ng-click="boardCtrl.newGame()">New Game</button>
+        <button data-ng-click="boardCtrl.clearBoard()">Clear</button>
+      </div>
+    </div>
+    <div class="controls">
+      <p>
         <span ng-hide="!boardCtrl.alreadyPicked">Already picked that</span>
         <span ng-hide="!boardCtrl.notAWord">Not in our dictionary!</span>
-      </div>
+        {{boardCtrl.selectedWord}}
+      </p>
+      <p class="score">score: {{boardCtrl.score}}</p>
     </div>
   </main>
   <script src="bundle.js"></script>
