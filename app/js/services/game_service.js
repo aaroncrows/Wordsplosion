@@ -1,24 +1,14 @@
-function GameService($http) {
+function GameService($http, WordListService) {
   var service = {};
   var wordList = [];
-  var allWords;
   var score;
-
-  if (!localStorage.allWords) {
-    $http.get('/words').then(function(data) {
-      localStorage.allWords = JSON.stringify(data.data);
-      allWords = data.data;
-    });
-  } else {
-    allWords = JSON.parse(localStorage.allWords);
-  }
 
   service.hasBeenPicked = function(word) {
     return wordList.indexOf(word) !== -1;
   };
 
   service.isWord = function(word) {
-    return allWords[word.toUpperCase()];
+    return WordListService.getWords()[word.toUpperCase()];
   };
 
   service.getWordList = function() {
@@ -55,6 +45,6 @@ function GameService($http) {
   return service;
 }
 
-GameService.$inject = ['$http'];
+GameService.$inject = ['$http', 'WordlistService'];
 
 module.exports = GameService;
