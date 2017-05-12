@@ -1,5 +1,4 @@
 var angular = require('angular');
-var boardCtrl = require('../../../app/js/controllers/board-controller.js');
 require('angular-mocks');
 require('../../../app/js/client');
 
@@ -58,6 +57,17 @@ describe('BoardController', function() {
     expect(boardCtrl.selectedWord).toBe('');
   });
 
+  it('newGame: should reset', function() {
+    var fakePromise = { then: function(fn) { fn(); } };
+    var newGame = spyOn(testBoardService, 'newGame').and.returnValue(fakePromise);
+    var clearBoard = spyOn(boardCtrl, 'clearBoard');
+
+    boardCtrl.newGame();
+
+    expect(newGame).toHaveBeenCalled();
+    expect(clearBoard).toHaveBeenCalled();
+  });
+
   it('submitWord: should set notAWord to true on invalid word', function() {
     var verifyWord = spyOn(testGameService, 'verifyWord');
     var isWord = spyOn(testGameService, 'isWord').and.returnValue(false);
@@ -113,13 +123,15 @@ describe('BoardController', function() {
     expect(verifyWord).toHaveBeenCalled();
   });
 
-  // it('scoreBoard: should score the board', function() {
-  //   var clearBoard = spyOn(boardCtrl, 'clearBoard');
-  //   var scoreBoard = spyOn(testGameService, 'scoreBoard');
+  it('scoreBoard: should score the board', function() {
+    var clearBoard = spyOn(boardCtrl, 'clearBoard');
+    var scoreBoard = spyOn(testGameService, 'scoreBoard').and.returnValue(42);
 
-  //   boardCtrl.scoreBoard();
+    boardCtrl.scoreBoard();
 
-  //   expect(clearBoard).toHaveBeenCalled();
-  //   expect(scoreBoard).toHaveBeenCalled();
-  // });
+    expect(clearBoard).toHaveBeenCalled();
+    expect(scoreBoard).toHaveBeenCalled();
+
+    expect(boardCtrl.score).toBe(42);
+  });
 });

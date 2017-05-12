@@ -8,15 +8,6 @@ function BoardService($http, gameService) {
   var board;
   var tree;
 
-  service.newGame = function() {
-    return $http.get('/new-game').then(function(data) {
-      data = data.data;
-      board = data.board;
-      gameService.resetGame();
-
-      return data;
-    });
-  };
 
   service.isChosen = function(letter) {
     var loc = letter.location;
@@ -27,6 +18,17 @@ function BoardService($http, gameService) {
 
   service.initializeBoard = function(height, width) {
     tree = new ActiveSquareMap(height, width);
+  };
+
+  service.newGame = function() {
+    return $http.get('/new-game').then(function(data) {
+      data = data.data;
+      board = data.board;
+      gameService.resetGame();
+      service.initializeBoard(data.board.length, data.board[0].length);
+
+      return data;
+    });
   };
 
   service.getBoard = function() {

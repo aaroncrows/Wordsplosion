@@ -22,10 +22,7 @@ function BoardController(gameService, boardService) {
 
   vm.newGame = function() {
     boardService.newGame()
-      .then(function(data) {
-        vm.board = boardService.getBoard();
-        vm.answers = data.solutions;
-        boardService.initializeBoard(data.board.length, data.board[0].length);
+      .then(function() {
         vm.clearBoard();
       });
   };
