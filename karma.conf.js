@@ -5,13 +5,13 @@ module.exports = function(config) {
   config.set({
     frameworks: ['jasmine'],
     files: [
-      // all files ending in "_test"
-      {pattern: 'test/client/**/*_test.js', watched: false}
-      // each file acts as entry point for the webpack configuration
+      'node_modules/angular/angular.js',
+      'node_modules/angular-mocks/angular-mocks.js',
+      'test/client/**/*_test.js',
     ],
 
     preprocessors: {
-      // add webpack as preprocessor
+      'app/js/client.js': ['webpack'],
       'test/**/*_test.js': ['webpack']
     },
 

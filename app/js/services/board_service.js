@@ -18,6 +18,7 @@ function BoardService($http, gameService) {
 
   service.initializeBoard = function(height, width) {
     tree = new ActiveSquareMap(height, width);
+    return tree;
   };
 
   service.newGame = function() {

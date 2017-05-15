@@ -1,4 +1,4 @@
-function WordlistService() {
+function WordlistService($http) {
   var service = {};
   var allWords;
 
@@ -21,5 +21,7 @@ function WordlistService() {
 
   return service;
 }
+
+WordlistService.$inject = ['$http'];
 
 module.exports = WordlistService;

@@ -5,10 +5,11 @@
   "description": "a simple word game",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/.bin/mocha",
+    "start": "nodemon server",
+    "test": "mocha",
     "test:client": "karma start || true",
     "hot": "webpack-dev-server --content-base app/ --hot",
-    "build": "./node_modules/.bin/gulp build",
+    "build": "gulp build",
     "postinstall": "npm run build"
   },
   "author": "Aaron Krause",

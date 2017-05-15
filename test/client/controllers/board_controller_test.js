@@ -1,6 +1,4 @@
-var angular = require('angular');
-require('angular-mocks');
-require('../../../app/js/client');
+require('../../../app/js/app')(angular);
 
 var testBoardService = {
   addLetter: function() {},
