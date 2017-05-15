@@ -13,7 +13,7 @@ function BoardController(gameService, boardService) {
   };
 
   vm.clearBoard = function() {
-    boardService.deactivateAll();
+    boardService.resetBoard();
     vm.selectedWord = '';
     vm.notAWord = false;
     vm.alreadyPicked = false;

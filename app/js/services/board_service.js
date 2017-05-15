@@ -1,24 +1,36 @@
-var ActiveSquareMap = require('../../lib/active_square_map');
-
 function BoardService($http, gameService) {
+  var ADJACENT_COORDS = [
+    [1, 0], [0, 1], [1, 1], [-1, 0],
+    [0, -1], [-1, -1], [-1, 1], [1, -1]
+  ];
+
   var service = {};
-  var selectedWord = '';
-  var selectedCoordinates = {};
+
+  var selected = {};
+  var boardHeight;
+  var boardWidth;
   var lastPicked;
   var board;
-  var tree;
-
+  var activeSquares;
 
   service.isChosen = function(letter) {
     var loc = letter.location;
-    var word = selectedCoordinates;
-
-    return (word[loc[0]] && word[loc[0]][loc[1]]);
+    return selected[loc[0]] && selected[loc[0]][loc[1]];
   };
 
   service.initializeBoard = function(height, width) {
-    tree = new ActiveSquareMap(height, width);
-    return tree;
+    activeSquares = {};
+    boardHeight = height;
+    boardWidth = width;
+
+    for (var i = 0; i < height; i++) {
+      activeSquares[i] = {};
+      for (var j = 0; j < width; j++) {
+        activeSquares[i][j] = false;
+      }
+    }
+
+    return activeSquares;
   };
 
   service.newGame = function() {
@@ -38,40 +50,56 @@ function BoardService($http, gameService) {
 
   service.isActive = function(letter) {
     var loc = letter.location;
-    return tree.map[loc[0]] && tree.map[loc[0]][loc[1]];
+    return activeSquares[loc[0]] && activeSquares[loc[0]][loc[1]];
   };
 
   service.addLetter = function(letter) {
     var loc = letter.location;
-    var selectedCoords = selectedCoordinates;
-    var activeLetter = selectedWord.length ? service.isActive(letter) : true;
-    var notChosen = !service.isChosen(letter);
-    var isAdjacent =  lastPicked ? tree.isAdjacent(loc, lastPicked) : true;
+    var isAdjacent = lastPicked ? service.isActive(letter) : true;
+    var chosen = service.isChosen(letter);
+    if (chosen || !isAdjacent) return false;
 
-    if (activeLetter && notChosen && isAdjacent) {
-      if (!selectedCoords[loc[0]]) selectedCoords[loc[0]] = {};
-      selectedCoords[loc[0]][loc[1]] = true;
-      lastPicked = loc;
+    if (!selected[loc[0]]) selected[loc[0]] = {};
+    selected[loc[0]][loc[1]] = true;
+    lastPicked = loc;
 
-      tree.deactivateAll();
-      tree.activateNode(letter.location);
-      return true;
-    }
+    service.deactivateAll();
+    service.activateNode(letter.location);
 
-    return false;
+    return true;
   };
 
-  service.deactivateAll = function(board) {
-    selectedCoordinates = {};
+  service.resetBoard = function() {
     lastPicked = null;
+    selected = {};
 
-    tree.deactivateAll(board);
+    service.deactivateAll();
+  };
+
+  service.deactivateAll = function() {
+    for (var i = 0; i < boardHeight; i++) {
+      activeSquares[i] = {};
+      for (var j = 0; j < boardWidth; j++) {
+        activeSquares[i][j] = false;
+      }
+    }
   };
 
   service.activateNode = function(location) {
-    tree.activateNode(location);
-  };
+    var x;
+    var y;
 
+    for (var i = 0; i < ADJACENT_COORDS.length; i++) {
+      x = location[0] + ADJACENT_COORDS[i][0];
+      y = location[1] + ADJACENT_COORDS[i][1];
+
+      if (activeSquares.hasOwnProperty(x) && activeSquares[x].hasOwnProperty(y)) {
+        activeSquares[x][y] = true;
+      }
+    };
+
+    activeSquares[location[0]][location[1]] = true;
+  };
 
   return service;
 }

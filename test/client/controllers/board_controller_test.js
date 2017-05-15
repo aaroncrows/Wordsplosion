@@ -2,7 +2,7 @@ require('../../../app/js/app')(angular);
 
 var testBoardService = {
   addLetter: function() {},
-  deactivateAll: function() {},
+  resetBoard: function() {},
   newGame: function() { return { then: function() {} }; }
 };
 
@@ -41,7 +41,7 @@ describe('BoardController', function() {
   });
 
   it('clearBoard: should reset defaults', function() {
-    var deactivateAll = spyOn(testBoardService, 'deactivateAll');
+    var resetBoard = spyOn(testBoardService, 'resetBoard');
 
     boardCtrl.alreadyPicked = true;
     boardCtrl.notAWord = true;
@@ -49,7 +49,7 @@ describe('BoardController', function() {
 
     boardCtrl.clearBoard();
 
-    expect(deactivateAll).toHaveBeenCalled();
+    expect(resetBoard).toHaveBeenCalled();
     expect(boardCtrl.alreadyPicked).toBe(false);
     expect(boardCtrl.notAWord).toBe(false);
     expect(boardCtrl.selectedWord).toBe('');
