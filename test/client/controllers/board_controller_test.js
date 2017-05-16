@@ -1,5 +1,3 @@
-require('../../../app/js/app')(angular);
-
 var testBoardService = {
   addLetter: function() {},
   resetBoard: function() {},

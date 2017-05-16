@@ -1,25 +1,26 @@
 function WordlistService($http) {
-  var service = {};
-  var allWords;
+  var svc = {};
 
-  service.init = function() {
-    if (!localStorage.allWords) {
+  svc.allWords = [];
+
+  svc.init = function() {
+    if (!localStorage.getItem('allWords')) {
       $http.get('/words').then(function(data) {
-        localStorage.allWords = JSON.stringify(data.data);
-        allWords = data.data;
+        localStorage.setItem('allWords', JSON.stringify(data.data));
+        svc.allWords = data.data;
       });
     } else {
-      allWords = JSON.parse(localStorage.allWords);
+      svc.allWords = JSON.parse(localStorage.getItem('allWords'));
     }
   };
 
-  service.getWords = function() {
-    return allWords;
+  svc.getWords = function() {
+    return svc.allWords;
   };
 
-  service.init();
+  svc.init();
 
-  return service;
+  return svc;
 }
 
 WordlistService.$inject = ['$http'];

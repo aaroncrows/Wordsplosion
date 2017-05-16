@@ -1,4 +1,3 @@
-require('../../../app/js/app')(angular);
 var testGameService = {
   resetGame: function() {}
 };

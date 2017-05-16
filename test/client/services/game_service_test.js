@@ -1,5 +1,3 @@
-require('../../../app/js/app')(angular);
-
 var testWordlistService = {
   init: function() {},
   getWords: function () {
