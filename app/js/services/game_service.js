@@ -1,48 +1,44 @@
 function GameService($http, WordListService) {
-  var service = {};
-  var wordList = [];
-  var score;
+  var svc = {};
+  svc.wordList = [];
+  svc.score = 0;
 
-  service.hasBeenPicked = function(word) {
-    return wordList.indexOf(word) !== -1;
+  svc.hasBeenPicked = function(word) {
+    return svc.wordList.indexOf(word) !== -1;
   };
 
-  service.isWord = function(word) {
+  svc.isWord = function(word) {
     return WordListService.getWords()[word.toUpperCase()];
   };
 
-  service.getWordList = function() {
-    return wordList;
+  svc.getWordList = function() {
+    return svc.wordList;
   };
 
-  service.resetGame = function() {
-    wordList = [];
-    score = 0;
+  svc.resetGame = function() {
+    svc.wordList = [];
+    svc.score = 0;
   };
 
-  service.verifyWord = function(word) {
-    var picked = service.hasBeenPicked(word);
-    var isWord = service.isWord(word);
+  svc.verifyWord = function(word) {
+    var picked = svc.hasBeenPicked(word);
+    var isWord = svc.isWord(word);
     //Only allows word submit if word longer than 2 characters in length,
     //not in either of the word lists and in the solution list.
     if (word.length > 2 && !picked && isWord) {
-      wordList.push(word);
+      svc.wordList.push(word);
     }
   };
 
-  service.scoreBoard = function() {
-    score = wordList.reduce(function(a, c) {
+  svc.scoreBoard = function() {
+    svc.score = svc.wordList.reduce(function(a, c) {
       return a + (c.length <= 8 ? c.length - 2 : 11);
     }, 0);
 
-    return score;
+    return svc.score;
   };
 
-  service.getBoard = function() {
-    return board;
-  };
-
-  return service;
+  return svc;
 }
 
 GameService.$inject = ['$http', 'WordlistService'];
