@@ -22,7 +22,7 @@ function ctrl(BoardService, $scope) {
     return BoardService.getBoard();
   }, function() {
     vm.board = BoardService.getBoard();
-  });
+  }, true);
 }
 
 ctrl.$inject = ['BoardService', '$scope'];
