@@ -1,4 +1,4 @@
-function GameService($http, WordListService) {
+function gameService($http, WordListService) {
   var svc = {};
   svc.wordList = [];
   svc.score = 0;
@@ -41,6 +41,6 @@ function GameService($http, WordListService) {
   return svc;
 }
 
-GameService.$inject = ['$http', 'WordlistService'];
+gameService.$inject = ['$http', 'wordlistService'];
 
-module.exports = GameService;
+module.exports = gameService;

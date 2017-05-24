@@ -1,4 +1,4 @@
-function BoardService($http, gameService) {
+function boardService($http, gameService) {
   var ADJACENT_COORDS = [
     [1, 0], [0, 1], [1, 1], [-1, 0],
     [0, -1], [-1, -1], [-1, 1], [1, -1]
@@ -96,6 +96,6 @@ function BoardService($http, gameService) {
   return svc;
 }
 
-BoardService.$inject = ['$http', 'GameService'];
+boardService.$inject = ['$http', 'gameService'];
 
-module.exports = BoardService;
+module.exports = boardService;

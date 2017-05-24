@@ -1,23 +1,23 @@
-var testGameService = {
+var testgameService = {
   resetGame: function() {}
 };
 
-var testWordlistService = {
+var testwordlistService = {
   init: function() {}
 };
 
-describe('BoardService', function() {
+describe('boardService', function() {
   var boardService;
   var $httpBackend;
 
   beforeEach(function() {
     angular.mock.module('app', {
-      WordlistService: testWordlistService,
-      GameService: testGameService
+      wordlistService: testwordlistService,
+      gameService: testgameService
     });
 
-    angular.mock.inject(function(_BoardService_, _$httpBackend_) {
-      boardService = _BoardService_;
+    angular.mock.inject(function(_boardService_, _$httpBackend_) {
+      boardService = _boardService_;
       $httpBackend = _$httpBackend_;
     });
   });
@@ -132,7 +132,7 @@ describe('BoardService', function() {
     var testResponse = {
       board: testBoard
     };
-    var resetGame = spyOn(testGameService, 'resetGame');
+    var resetGame = spyOn(testgameService, 'resetGame');
     var initializeBoard = spyOn(boardService, 'initializeBoard');
 
     $httpBackend.expectGET('/new-game').respond(200, testResponse);

@@ -1,10 +1,10 @@
-var testBoardService = {
+var testboardService = {
   addLetter: function() {},
   resetBoard: function() {},
   newGame: function() { return { then: function() {} }; }
 };
 
-var testGameService = {
+var testgameService = {
   isWord: function() {},
   verifyWord: function() {},
   hasBeenPicked: function() {},
@@ -18,8 +18,8 @@ describe('BoardController', function() {
     angular.mock.module('app');
     angular.mock.inject(function(_$controller_) {
       boardCtrl = _$controller_('boardController', {
-        BoardService: testBoardService,
-        GameService: testGameService
+        boardService: testboardService,
+        gameService: testgameService
       });
     });
   });
@@ -31,7 +31,7 @@ describe('BoardController', function() {
   });
 
   it('addLetter: should add a letter to selected word', function() {
-    var addLetter = spyOn(testBoardService, 'addLetter').and.returnValue(true);
+    var addLetter = spyOn(testboardService, 'addLetter').and.returnValue(true);
     boardCtrl.addLetter({letter: 't'});
 
     expect(addLetter).toHaveBeenCalled();
@@ -39,7 +39,7 @@ describe('BoardController', function() {
   });
 
   it('clearBoard: should reset defaults', function() {
-    var resetBoard = spyOn(testBoardService, 'resetBoard');
+    var resetBoard = spyOn(testboardService, 'resetBoard');
 
     boardCtrl.alreadyPicked = true;
     boardCtrl.notAWord = true;
@@ -55,7 +55,7 @@ describe('BoardController', function() {
 
   it('newGame: should reset', function() {
     var fakePromise = { then: function(fn) { fn(); } };
-    var newGame = spyOn(testBoardService, 'newGame').and.returnValue(fakePromise);
+    var newGame = spyOn(testboardService, 'newGame').and.returnValue(fakePromise);
     var clearBoard = spyOn(boardCtrl, 'clearBoard');
 
     boardCtrl.newGame();
@@ -65,8 +65,8 @@ describe('BoardController', function() {
   });
 
   it('submitWord: should set notAWord to true on invalid word', function() {
-    var verifyWord = spyOn(testGameService, 'verifyWord');
-    var isWord = spyOn(testGameService, 'isWord').and.returnValue(false);
+    var verifyWord = spyOn(testgameService, 'verifyWord');
+    var isWord = spyOn(testgameService, 'isWord').and.returnValue(false);
 
     boardCtrl.selectedWord = 'xxxx';
     boardCtrl.submitWord();
@@ -78,10 +78,10 @@ describe('BoardController', function() {
   });
 
   it('submitWord: should set alreadyPick to true on picked letter', function() {
-    var verifyWord = spyOn(testGameService, 'verifyWord');
+    var verifyWord = spyOn(testgameService, 'verifyWord');
 
-    var hasBeenPicked = spyOn(testGameService, 'hasBeenPicked').and.returnValue(true);
-    spyOn(testGameService, 'isWord').and.returnValue(true);
+    var hasBeenPicked = spyOn(testgameService, 'hasBeenPicked').and.returnValue(true);
+    spyOn(testgameService, 'isWord').and.returnValue(true);
 
     boardCtrl.selectedWord = 'test';
     boardCtrl.submitWord();
@@ -93,7 +93,7 @@ describe('BoardController', function() {
   });
 
   it('submitWord: should set tooShort to true for length less than 3', function() {
-    var verifyWord = spyOn(testGameService, 'verifyWord');
+    var verifyWord = spyOn(testgameService, 'verifyWord');
 
     boardCtrl.selectedWord = '';
     boardCtrl.submitWord();
@@ -104,9 +104,9 @@ describe('BoardController', function() {
   });
 
   it('submitWord: should verify word if it passes both checks', function() {
-    var isWord = spyOn(testGameService, 'isWord').and.returnValue(true);
-    var hasBeenPicked = spyOn(testGameService, 'hasBeenPicked').and.returnValue(false);
-    var verifyWord = spyOn(testGameService, 'verifyWord');
+    var isWord = spyOn(testgameService, 'isWord').and.returnValue(true);
+    var hasBeenPicked = spyOn(testgameService, 'hasBeenPicked').and.returnValue(false);
+    var verifyWord = spyOn(testgameService, 'verifyWord');
     var clearBoard = spyOn(boardCtrl, 'clearBoard');
 
     boardCtrl.selectedWord = 'test';
@@ -121,7 +121,7 @@ describe('BoardController', function() {
 
   it('scoreBoard: should score the board', function() {
     var clearBoard = spyOn(boardCtrl, 'clearBoard');
-    var scoreBoard = spyOn(testGameService, 'scoreBoard').and.returnValue(42);
+    var scoreBoard = spyOn(testgameService, 'scoreBoard').and.returnValue(42);
 
     boardCtrl.scoreBoard();
 

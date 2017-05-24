@@ -9,17 +9,17 @@ function WordList() {
   };
 }
 
-function ctrl(GameService, $scope) {
+function ctrl(gameService, $scope) {
   var ctrl = this;
   $scope.$watch(function() {
-    return GameService.getWordList()
+    return gameService.getWordList()
   }, function() {
-    ctrl.words = GameService.getWordList();
+    ctrl.words = gameService.getWordList();
   }, true);
 
-  this.words = GameService.getWordList();
+  this.words = gameService.getWordList();
 }
 
-ctrl.$inject = ['GameService', '$scope'];
+ctrl.$inject = ['gameService', '$scope'];
 
 module.exports = WordList;

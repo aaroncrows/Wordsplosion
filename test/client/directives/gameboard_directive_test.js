@@ -4,11 +4,11 @@ describe('GameBoard', function() {
 
   beforeEach(function() {
     angular.mock.module('app', {
-      WordlistService: {
+      wordlistService: {
         init: function() {}
       },
 
-      BoardService: {
+      boardService: {
         isActive: function() {
           return true;
         },

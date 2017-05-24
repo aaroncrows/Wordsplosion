@@ -1,20 +1,20 @@
-var testWordlistService = {
+var testwordlistService = {
   init: function() {},
   getWords: function () {
     return { TEST: true };
   }
 };
 
-describe('GameService', function() {
+describe('gameService', function() {
   var gameService;
 
   beforeEach(function() {
     angular.mock.module('app', {
-      WordlistService: testWordlistService
+      wordlistService: testwordlistService
     });
 
-    angular.mock.inject(function(_GameService_) {
-      gameService = _GameService_;
+    angular.mock.inject(function(_gameService_) {
+      gameService = _gameService_;
     });
   });
 
@@ -26,7 +26,7 @@ describe('GameService', function() {
     expect(result).toBe(true);
   });
 
-  it('isWord: should check the word against the list of all words in WordlistService', function() {
+  it('isWord: should check the word against the list of all words in wordlistService', function() {
     var result = gameService.isWord('test');
 
     expect(result).toBe(true);

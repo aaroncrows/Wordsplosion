@@ -1,4 +1,4 @@
-describe('WordlistService', function() {
+describe('wordlistService', function() {
   var wordlistService;
   var tempStorage;
   var $httpBackend;
@@ -7,8 +7,8 @@ describe('WordlistService', function() {
     tempStorage = localStorage;
     angular.mock.module('app');
 
-    angular.mock.inject(function(_WordlistService_, _$httpBackend_) {
-      wordlistService = _WordlistService_;
+    angular.mock.inject(function(_wordlistService_, _$httpBackend_) {
+      wordlistService = _wordlistService_;
       $httpBackend = _$httpBackend_;
     });
   });

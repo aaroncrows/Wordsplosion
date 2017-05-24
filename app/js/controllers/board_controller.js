@@ -46,6 +46,6 @@ function BoardController(gameService, boardService) {
   vm.newGame();
 }
 
-BoardController.$inject = ['GameService', 'BoardService'];
+BoardController.$inject = ['gameService', 'boardService'];
 
 module.exports = BoardController;

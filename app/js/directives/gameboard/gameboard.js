@@ -12,19 +12,19 @@ function GameBoard() {
   };
 }
 
-function ctrl(BoardService, $scope) {
+function ctrl(boardService, $scope) {
   var vm = this;
 
-  vm.isActive = BoardService.isActive;
-  vm.isChosen = BoardService.isChosen;
+  vm.isActive = boardService.isActive;
+  vm.isChosen = boardService.isChosen;
 
   $scope.$watch(function() {
-    return BoardService.getBoard();
+    return boardService.getBoard();
   }, function() {
-    vm.board = BoardService.getBoard();
+    vm.board = boardService.getBoard();
   }, true);
 }
 
-ctrl.$inject = ['BoardService', '$scope'];
+ctrl.$inject = ['boardService', '$scope'];
 
 module.exports = GameBoard;

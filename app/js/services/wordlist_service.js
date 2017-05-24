@@ -1,4 +1,4 @@
-function WordlistService($http) {
+function wordlistService($http) {
   var svc = {};
 
   svc.allWords = [];
@@ -23,6 +23,6 @@ function WordlistService($http) {
   return svc;
 }
 
-WordlistService.$inject = ['$http'];
+wordlistService.$inject = ['$http'];
 
-module.exports = WordlistService;
+module.exports = wordlistService;

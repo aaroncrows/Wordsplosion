@@ -4,10 +4,10 @@ describe('WordList', function() {
 
   beforeEach(function() {
     angular.mock.module('app', {
-      WordlistService: {
+      wordlistService: {
         init: function() {}
       },
-      GameService: {
+      gameService: {
         getWordList: function() {
           return ['test'];
         }
