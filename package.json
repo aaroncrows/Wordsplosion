@@ -6,8 +6,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server",
-    "test": "mocha",
+    "test:server": "mocha",
     "test:client": "karma start || true",
+    "test": "npm run test:server && npm run test:client",
     "hot": "webpack-dev-server --content-base app/ --hot",
     "build": "gulp build",
     "postinstall": "npm run build"

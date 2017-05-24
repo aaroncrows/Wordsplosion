@@ -3,10 +3,12 @@ var fs = require('fs');
 var game = require('../lib/game.js');
 var currentBoard;
 
-var wordMap = fs.readFileSync(__dirname + '/../lib/wordlist.txt', 'utf8').replace(/\r/g, '').split('\n').reduce(function(a, c) {
-  a[c] = true;
-  return a;
-}, {});
+var wordMap = fs.readFileSync(__dirname + '/../lib/wordlist.txt', 'utf8')
+  .replace(/\r/g, '').split('\n')
+  .reduce(function(a, c) {
+    a[c] = true;
+    return a;
+  }, {});
 
 module.exports = function(app) {
   app.get('/new-game', function(req, res) {

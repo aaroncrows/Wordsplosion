@@ -1,5 +1,5 @@
 module.exports = function(angular) {
-  var BoardController = require('./controllers/board-controller');
+  var BoardController = require('./controllers/board_controller');
 
   var GameService = require('./services/game_service');
   var BoardService = require('./services/board_service');

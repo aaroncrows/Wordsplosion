@@ -32,7 +32,7 @@ describe('GameBoard', function() {
     var element  = $compile('<game-board></game-board>')(scope);
 
     scope.$digest();
-    console.log(element.find('.board-square').html());
+
     expect(element.find('p').text()).toBe('test');
   });
 });
