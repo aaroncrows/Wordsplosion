@@ -1,0 +1,30 @@
+@import '../base/mixins';
+@import '../base/breakpoints';
+
+.word-list {
+  li {
+    font-size: 30px;
+    margin-bottom: 3%;
+    margin-left: 15px;
+
+    &:after {
+      content: ",";
+    }
+
+    &:last-child {
+      &:after {
+        content: ""
+      }
+    }
+  }
+
+  &:after {
+    content: "";
+    float: left;
+    margin-top: 40px;
+  }
+}
+
+@media only screen and (min-width: $tablet) {
+  overflow: scroll;
+}

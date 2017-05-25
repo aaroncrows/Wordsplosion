@@ -1,0 +1,13 @@
+@mixin noselect() {
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+@mixin clearfix() {
+  content: "";
+  display: table;
+  clear: both;
+}

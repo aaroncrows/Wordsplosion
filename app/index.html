@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>WORDSPLOSION</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style href="./css/main.css" rel="stylesheet" type="text/css"></style>
 </head>
 <body data-ng-app="app">
@@ -16,19 +17,17 @@
 	  <div class="game-area">
       <game-board board="boardCtrl.board" is-active="boardCtrl.isActive" is-chosen="boardCtrl.isChosen" add-letter="boardCtrl.addLetter">
       </game-board>
-      <div class="results">
-        <word-list words="boardCtrl.wordList"></word-list>
-        <button data-ng-click="boardCtrl.submitWord()">Submit</button>
-        <button data-ng-click="boardCtrl.clearBoard()">Clear</button>
-      </div>
+      <word-list words="boardCtrl.wordList"></word-list>
     </div>
     <div class="controls">
-      <p>
+      <p class="selected-word">
         <span ng-if="boardCtrl.alreadyPicked">You already picked that.</span>
         <span ng-if="boardCtrl.notAWord">That's not in our dictionary.</span>
         <span ng-if="boardCtrl.tooShort">Must be three or more letters.</span>
         {{boardCtrl.selectedWord}}
       </p>
+      <button data-ng-click="boardCtrl.submitWord()">Submit</button>
+      <button data-ng-click="boardCtrl.clearBoard()">Clear</button>
       <p class="score">score: {{boardCtrl.score}}</p>
     </div>
   </main>

@@ -1,0 +1,51 @@
+@import './colors';
+@import './mixins';
+
+html {
+  box-sizing: border-box;
+  background-color: rgba(200, 200, 255, 0.5);
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body, main {
+  min-height: 100%;
+}
+
+main {
+  max-width: 900px;
+  // background-color: rgba(200, 200, 255, 0.5);
+  margin: 0 auto;
+
+  &:after {
+    @include clearfix();
+  }
+}
+
+button {
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 20px;
+  outline: none;
+  border: 2px solid $color-medium;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: $color-chosen;
+    border: 2px solid $color-bright;
+  }
+}
+
+[data-ng-cloak] {
+  display: none !important;
+}
+
+p, span, h1, li, .score, .letter {
+  text-shadow: 0 0 2px white;
+  font-weight: bold;
+  font-family: Helvetica;
+}

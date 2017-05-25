@@ -8,6 +8,7 @@ function GameBoard() {
     controller: ctrl,
     bindToController: true,
     controllerAs: 'ctrl',
+    replace: true,
     template: template
   };
 }

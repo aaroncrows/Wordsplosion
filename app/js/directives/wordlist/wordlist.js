@@ -5,6 +5,7 @@ function WordList() {
     restrict: 'E',
     controller: ctrl,
     controllerAs: 'ctrl',
+    replace: true,
     template
   };
 }
