@@ -6,7 +6,7 @@ function WordList() {
     controller: ctrl,
     controllerAs: 'ctrl',
     replace: true,
-    template
+    template: template
   };
 }
 
