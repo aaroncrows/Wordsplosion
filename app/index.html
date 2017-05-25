@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style href="./css/main.css" rel="stylesheet" type="text/css"></style>
 </head>
-<body data-ng-app="app">
-  <main data-ng-controller="boardController as boardCtrl" data-ng-cloak>
-
+<body data-ng-app="app" data-ng-cloak>
+  <main data-ng-controller="boardController as boardCtrl">
     <nav>
       <h1>WORDSPLOSION</h1>
-      <button data-ng-click="boardCtrl.newGame()">New</button>
+      <button data-ng-click="boardCtrl.navButtonClick()">
+        New
+      </button>
     </nav>
 	  <div class="game-area">
-      <game-board board="boardCtrl.board" is-active="boardCtrl.isActive" is-chosen="boardCtrl.isChosen" add-letter="boardCtrl.addLetter">
+      <game-board should-display="boardCtrl.navButton" add-letter="boardCtrl.addLetter">
       </game-board>
       <word-list words="boardCtrl.wordList"></word-list>
     </div>

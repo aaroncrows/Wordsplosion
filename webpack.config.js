@@ -1,4 +1,4 @@
-module.exports = {
+var config = {
   entry: [__dirname + '/app/js/client.js'],
   output: {
     filename: 'bundle.js',
@@ -16,3 +16,16 @@ module.exports = {
     modulesDirectories: ['node_modules']
   }
 };
+
+if (process.env.NODE_ENV === 'production') {
+  var UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin');
+  var CompressionPlugin = require('compression-webpack-plugin');
+
+  config.plugins = [
+    new UglifyJsPlugin(),
+    new CompressionPlugin()
+  ]
+}
+
+module.exports = config;
+
