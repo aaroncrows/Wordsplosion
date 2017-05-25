@@ -1,15 +1,16 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var morgan = require('morgan');
 
 var app = express();
 
+var port = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+if (process.env.DEVELOPMENT_MODE) app.use(require('morgan')('dev'));
 app.use(express.static(__dirname + '/build'));
 
 require('./router/game-routes')(app);
 
-app.listen(3000, function() {
-  console.log('listening on 3000');
+app.listen(port, function() {
+  console.log('listening on ' + port);
 });
