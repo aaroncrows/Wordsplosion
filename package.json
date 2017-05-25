@@ -8,7 +8,7 @@
     "node": "6.3.1"
   },
   "scripts": {
-    "start": "nodemon server",
+    "start": "node server",
     "test:server": "mocha",
     "test:client": "karma start || true",
     "test": "npm run test:server && npm run test:client",
