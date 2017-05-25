@@ -8,6 +8,8 @@ function gameService($http, WordListService) {
   };
 
   svc.isWord = function(word) {
+    // Qu square has a lower case letter and everything in the wordlist is
+    // upper case.
     return WordListService.getWords()[word.toUpperCase()];
   };
 
@@ -27,7 +29,10 @@ function gameService($http, WordListService) {
     //not in either of the word lists and in the solution list.
     if (word.length > 2 && !picked && isWord) {
       svc.wordList.push(word);
+      return true;
     }
+
+    return false;
   };
 
   svc.scoreBoard = function() {

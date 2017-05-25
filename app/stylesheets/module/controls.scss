@@ -19,8 +19,10 @@
 
   span {
     font-size: 18px;
-    color: $color-bright;;
+    color: $color-bright;
     text-align: center;
+    font-weight: normal;
+    text-shadow: none;
   }
 
   .score {

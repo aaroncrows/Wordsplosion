@@ -3,7 +3,7 @@
 
 html {
   box-sizing: border-box;
-  background-color: rgba(200, 200, 255, 0.5);
+  background-color: $color-background;
 }
 
 *, *:before, *:after {
@@ -16,7 +16,6 @@ html, body, main {
 
 main {
   max-width: 900px;
-  // background-color: rgba(200, 200, 255, 0.5);
   margin: 0 auto;
 
   &:after {
@@ -31,7 +30,7 @@ button {
   outline: none;
   border: 2px solid $color-medium;
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0);
+  background-color: $transparent-background;
   transition: background-color 300ms;
 
   &:hover {
@@ -44,7 +43,7 @@ button {
   display: none !important;
 }
 
-p, span, h1, li, .score, .letter {
+p, h1, li, .score, .letter {
   text-shadow: 0 0 2px white;
   font-weight: bold;
   font-family: Helvetica;

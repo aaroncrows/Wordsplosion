@@ -29,13 +29,15 @@ function BoardController(gameService, boardService) {
 
   vm.submitWord = function() {
     var word = vm.selectedWord;
+    var validWord;
 
     vm.clearBoard();
     if (word.length <= 2) return vm.tooShort = true;
     if (!gameService.isWord(word)) return vm.notAWord = true;
     if (gameService.hasBeenPicked(word)) return vm.alreadyPicked = true;
 
-    gameService.verifyWord(word);
+    validWord = gameService.verifyWord(word);
+    if (validWord) vm.score = gameService.scoreBoard();
   };
 
   vm.scoreBoard = function() {
