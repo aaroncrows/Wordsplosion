@@ -1,5 +1,6 @@
 @import '../base/colors';
 @import '../base/mixins';
+@import '../base/breakpoints';
 
 .board {
   .board-square {
@@ -31,7 +32,7 @@
 
     .letter {
       @include noselect();
-      font-size: 50px;
+      font-size: 35px;
       font-family: Impact;
     }
   }
@@ -39,9 +40,22 @@
   .board-row {
     margin-bottom: 2%;
 
+    &:last-child {
+      margin-bottom: 0;
+    }
+
     &:after {
       @include clearfix();
     }
   }
 }
 
+@media only screen and (min-width: $mobile) {
+  .board {
+    .board-square {
+      .letter {
+        font-size: 50px;
+      }
+    }
+  }
+}

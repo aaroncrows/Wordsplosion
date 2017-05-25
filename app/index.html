@@ -10,12 +10,12 @@
   <main data-ng-controller="boardController as boardCtrl">
     <nav>
       <h1>WORDSPLOSION</h1>
-      <button data-ng-click="boardCtrl.navButtonClick()">
+      <button data-ng-click="boardCtrl.newGame()">
         New
       </button>
     </nav>
 	  <div class="game-area">
-      <game-board should-display="boardCtrl.navButton" add-letter="boardCtrl.addLetter">
+      <game-board add-letter="boardCtrl.addLetter">
       </game-board>
       <word-list words="boardCtrl.wordList"></word-list>
     </div>
