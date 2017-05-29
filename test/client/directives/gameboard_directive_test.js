@@ -27,7 +27,7 @@ describe('GameBoard', function() {
     });
   });
 
-  it('should render the gameBoard', function() {
+  it('should render the <game-board>', function() {
     var scope = $rootScope.$new();
     var element  = $compile('<game-board></game-board>')(scope);
 

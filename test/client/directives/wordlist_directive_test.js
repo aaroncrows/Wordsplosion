@@ -20,7 +20,7 @@ describe('WordList', function() {
     });
   });
 
-  it('should render the wordList', function() {
+  it('should render the <word-list>', function() {
     var scope = $rootScope.$new();
 
     var element = angular.element('<word-list></word-list>');
