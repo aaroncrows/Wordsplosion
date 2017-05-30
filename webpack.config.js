@@ -7,7 +7,7 @@ var config = {
   module: {
     loaders: [
       { test: /\.scss$/, loader: 'style!css!sass'},
-      { test: /[\/]angular\.js$/, loader: "exports?angular" },
+      { test: /[\/]angular\.js$/, loader: 'exports?angular' },
       { test: /\.html$/, loader: 'html' }
     ]
   },
@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'production') {
   config.plugins = [
     new UglifyJsPlugin(),
     new CompressionPlugin()
-  ]
+  ];
 }
 
 module.exports = config;

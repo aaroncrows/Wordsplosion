@@ -43,7 +43,7 @@ describe('Game tests', function() {
   it('should not reuse letters', function() {
     var results = game.findWords(board);
 
-    expect(results['STATE']).to.eql(undefined);
+    expect(results['STATE']).to.eql(undefined); // eslint-disable-line
   });
 
   it('should make a board of the correct size', function() {

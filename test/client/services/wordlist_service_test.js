@@ -37,7 +37,7 @@ describe('wordlistService', function() {
     $httpBackend.expectGET('/words').respond(200, { TEST: true });
     $httpBackend.flush();
     expect(wordlistService.allWords).toEqual({TEST: true });
-    expect(setItem).toHaveBeenCalledWith('allWords', '{"TEST":true}')
+    expect(setItem).toHaveBeenCalledWith('allWords', '{"TEST":true}');
   });
 });
 

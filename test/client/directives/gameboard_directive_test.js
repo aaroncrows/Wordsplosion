@@ -19,7 +19,7 @@ describe('GameBoard', function() {
           return [[{ letter: 'test' }]];
         }
       }
-  });
+    });
 
     angular.mock.inject(function(_$rootScope_, _$compile_) {
       $rootScope = _$rootScope_;

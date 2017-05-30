@@ -13,7 +13,7 @@ function WordList() {
 function ctrl(gameService, $scope) {
   var ctrl = this;
   $scope.$watch(function() {
-    return gameService.getWordList()
+    return gameService.getWordList();
   }, function() {
     ctrl.words = gameService.getWordList();
   }, true);
